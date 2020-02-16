@@ -1,20 +1,17 @@
-# Programação Aplicada ao SIG
-
-## Uma abordagem utilizando o QGIS e a linguagem Python
+# CURSO SUPERIOR DE TECNOLOGIA EM GEOPROCESSAMENTO - IFPB
 
 ![ifpb](.pastes/ifpb.png)
 
-### CURSO SUPERIOR DE TECNOLOGIA EM GEOPROCESSAMENTO - IFPB
 
-<hr/>
-
-### ÍNDICE:
+# Programação Aplicada ao SIG
+Uma abordagem utilizando o QGIS e a linguagem Python
 
 ### FUNDAMENTOS DA LINGUAGEM PYTHON
 
 #### [1. Introdução à Linguagem][a]
 #### [2. Desvios Condicionais][b]
 #### [3. Strings][c]
+#### [4. Listas][d]
 
 ### PYQGIS
 
@@ -27,6 +24,7 @@
 [a]:1-introducao-a-linguagem.md
 [b]:2-desvios-condicionais.md
 [c]:3-strings.md
+[d]:4-listas.md
 
 [1]:1-introducao-ao-pyqgis.md
 [2]:2-acessando-camadas.md

@@ -43,6 +43,16 @@ nome.upper()
 >>> 'JOÃO'
 ```
 
+### Comprimento de uma String
+
+É obtida através da função len():
+
+```python
+print(len('IFPB'))
+
+>>> 4
+```
+
 ### Concatenação de Strings:
 
 ```python
