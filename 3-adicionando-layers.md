@@ -51,3 +51,19 @@ QgsProject.instance().addMapLayer(vlayer)
 ```
 
 Existem vários outros tipos de dados que podem ser carregados de forma análoga ao que foi mostrado: csv, wms, wfs, geodatabase (ESRI), dentre outros. Pesquise sobre como carregar estes outros formatos.
+
+## 3.4 Adicionando Layers WMS
+
+```python
+project = QgsProject.instance()
+
+uri = "url=http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png&zmax=19&zmin=0&type=xyz" 
+
+osm_layer = QgsRasterLayer(uri,'OSM','wms')
+
+project.addMapLayer(osm_layer)
+
+project.write()
+```
+
+![](.pastes/2020-02-16-09-23-52.png)
