@@ -85,3 +85,5 @@ mediafiles
 # python notebooks
 *.ipynb
 .vscode/
+
+.dnconfig
