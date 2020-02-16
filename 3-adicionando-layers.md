@@ -45,8 +45,9 @@ uri = QgsDataSourceUri()
 uri.setConnection('localhost', '5432', 'nome_banco', 'usuario', 'senha')
 uri.setDataSource ('public', 'tabela', 'geom')
 
-vlayer=QgsVectorLayer(uri.uri(False), 'tabela', 'postgres')
+vlayer = QgsVectorLayer(uri.uri(False), 'tabela', 'postgres')
 
 QgsProject.instance().addMapLayer(vlayer)
 ```
 
+Existem vários outros tipos de dados que podem ser carregados de forma análoga ao que foi mostrado: csv, wms, wfs, geodatabase (ESRI), dentre outros. Pesquise sobre como carregar estes outros formatos.

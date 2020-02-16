@@ -10,7 +10,7 @@ O PyQGIS é um pacote python, que permite que você acesse e manipule o QGIS de 
 * criar novas aplicações independentes (stand-alone).
 
 ### 1.1 Criando o seu primeiro programa:
- 
+
 Para acessar o console python, o usuário deve entrar no menu `plugins` e clicar em `python console`:
 
 ![](.pastes/2020-01-29-15-59-05.png)
