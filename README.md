@@ -12,6 +12,7 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 #### [2. Desvios Condicionais][b]
 #### [3. Strings][c]
 #### [4. Listas][d]
+#### [5. Dicionários][e]
 
 ### PYQGIS
 
@@ -25,6 +26,7 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 [b]:2-desvios-condicionais.md
 [c]:3-strings.md
 [d]:4-listas.md
+[e]:5-dicionarios.md
 
 [1]:1-introducao-ao-pyqgis.md
 [2]:2-acessando-camadas.md
