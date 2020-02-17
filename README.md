@@ -1,5 +1,3 @@
-# CURSO SUPERIOR DE TECNOLOGIA EM GEOPROCESSAMENTO - IFPB
-
 ![ifpb](.pastes/ifpb.png)
 
 
