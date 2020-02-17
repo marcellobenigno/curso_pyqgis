@@ -48,9 +48,3 @@ if layer.isValid():
    for feature in layer.getFeatures(request):
        print(f"NOME: {feature['nome']}, ÁREA KM2: {feature['area_km2']}")
 ```
-
-
-
-
-
-![Python](/Users/marcello/code/curso_pyqgis/2020-02-14_07-19-36.png)
