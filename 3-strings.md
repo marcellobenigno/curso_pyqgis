@@ -1,4 +1,4 @@
-# Strings
+# 3. Strings
 
 Uma string em Python é objeto do tipo str.
 

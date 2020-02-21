@@ -1,4 +1,4 @@
-# Listas
+# 4. Listas e Tuplas
 
 Uma lista é representada como uma sequência de objetos separados por vírgula e dentro de colchetes [], assim, uma lista vazia, por exemplo, pode ser representada por colchetes sem nenhum conteúdo.
 
@@ -112,3 +112,27 @@ print(sorted(lista))
 ```
 
 💡 a diferença entre a função `sort()` e a função `sorted` é que em `sort()` você altera a lista em si, e em `sorted()` você tem um valor que pode ser utilizado em uma nova variável.
+
+## Tuplas
+
+uma tupla é uma lista **imutável**. O que diferencia a estrutura de dados lista da estrutura de dados tupla é que a primeira pode ter elementos adicionados a qualquer momento, enquanto que a segunda estrutura, após definida, não permite a adição ou remoção de elementos.
+
+Exemplo de tuplas:
+
+```python
+t = (1, 2, 3)
+
+cond = (True, False)
+
+sexo = (
+  ('M', 'Masculino'),
+  ('F', 'Feminino'),
+)
+
+t2 = tuple("a", "b", "c")
+```
+
+
+
+
+

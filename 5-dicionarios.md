@@ -1,4 +1,4 @@
-# Dicionários
+# 5. Dicionários
 
 Um dicionário é um tipo de dado integrado do python e é usado basicamente para mapear chaves e valores. Esse comportamento é utilizado tanto para manipulação quanto para armazenamento de dados.
 
