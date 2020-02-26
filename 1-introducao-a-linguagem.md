@@ -60,7 +60,7 @@ echo 'olá: ' . $nome;
 #### Python: 😍
 ``` python
 nome = input('Digite seu nome: ')
-print('Olá, nome)
+print('Olá', nome)
 ```
 
 ### O Interpretador Python:
