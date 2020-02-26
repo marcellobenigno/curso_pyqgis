@@ -35,6 +35,11 @@ Livros:
 1. [Pense em Python](https://penseallen.github.io/PensePython2e/)
 2. [Automate the Boring Stuff with Python](http://automatetheboringstuff.com/)
 
+Cursos:
+1. [Python Pro](https://www.python.pro.br/)
+2. [Python para Zumbis](https://www.pycursos.com/python-para-zumbis/)
+3. [Welcome to the Django](https://henriquebastos.net/produtos/welcome-to-the-django/)
+
 #### Sobre PyQGIS:
 
 Canais no YouTube:
