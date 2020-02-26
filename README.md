@@ -54,7 +54,7 @@ Udemy:
 
 Leituras:
 
-1. [QGIS Python APi](https://qgis.org/pyqgis/master/)
+1. [QGIS Python API](https://qgis.org/pyqgis/master/)
 2. [PyQGIS Developer Cookbook](https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/)
 3. [PyQGIS 101 (Anita Graser)](https://anitagraser.com/pyqgis-101-introduction-to-qgis-python-programming-for-non-programmers/)
 4. [Repositório do Canal Geocast Brasil](https://gitlab.com/geocastbrasil/livepyqgis)
