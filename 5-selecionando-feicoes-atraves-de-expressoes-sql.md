@@ -52,7 +52,7 @@ print(selectedFeatures)
 # >>> [70, 210, 211, 209, 74, ...]
 ```
  
- ## Criando uma Camada em Memória das Feições Selecionadas:
+ ## 5.4 Criando uma Camada em Memória das Feições Selecionadas:
  
 ```python    
 lyr.selectByExpression("nome ILIKE '%jo%'")
