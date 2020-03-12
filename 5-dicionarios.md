@@ -74,3 +74,13 @@ print(imovel)
 
 >>> {'matricula': 222, 'quadra': 25, 'area_m2': 630}
 ```
+
+## Exercícios
+
+1. Crie um programa onde a entrada de dados será a matrícula, o nome e a área em hectares de um imóvel rural, guarde essas informações em um dicionário, por fim, imprima estes valores da seguinte forma:
+
+    O nome do imóvel rural é: Fazenda Cuiá
+
+    A sua matrícula é: 123456 
+
+    e a sua área é: 200.5 ha.
