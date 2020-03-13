@@ -83,4 +83,30 @@ print(imovel)
 
     A sua matrícula é: 123456 
 
-    e a sua área é: 200.5 ha.
+    e a sua área é: 143.90 ha.
+    
+2. Crie um programa que recebe como parâmetro de entrada uma das seguintes direções: N (Norte), S (Sul), L (Leste) ou O (Oeste). O programa deve devolver a direção a direita do valor informado, ou seja:
+
+* O usuário digitou N: o programa deve devolver a direção Leste -> L
+* O usuário digitou L: o programa deve devolver a direção Sul -> S
+* O usuário digitou S o programa deve devolver a direção Oeste -> O
+* O usuário digitou O: o programa deve devolver a direção Norte -> N
+
+Exemplo de funcionamento do programa:
+
+```python
+>>> Digite uma direção (N, L, S, O): N
+>>> A direção a direita de N é L
+```
+
+1. Repita o programa anterior, dessa vez simulando o giro a esquerda, ou seja:
+* O usuário digitou N: o programa deve devolver a direção Oeste -> O
+* O usuário digitou O: o programa deve devolver a direção Sul -> S
+* O usuário digitou S: o programa deve devolver a direção Leste -> L
+* O usuário digitou Leste: o programa deve devolver a direção Norte -> N
+Exemplo de funcionamento do programa:
+
+```python
+>>> Digite uma direção (N, L, S, O): N
+>>> A direção a esquerda de N é O
+```
