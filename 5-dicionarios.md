@@ -110,3 +110,23 @@ Exemplo de funcionamento do programa:
 >>> Digite uma direção (N, L, S, O): N
 >>> A direção a esquerda de N é O
 ```
+
+4. A partir do dicionário abaixo:
+
+```python
+a = {
+    'ola' : 'mundo',
+     'tudo': 'bem',
+     'com': 'vc?'
+}
+```
+
+Crie o dicionário a seguir:
+
+```python
+b = {
+    'bem': 'tudo', 
+    'mundo': 'ola', 
+    'vc?': 'com'
+}
+```
