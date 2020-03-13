@@ -96,7 +96,7 @@ Exemplo de funcionamento do programa:
 
 ```python
 >>> Digite uma direção (N, L, S, O): N
->>> A direção a direita de N é L
+>>> A direção à direita de N é L
 ```
 
 3. Repita o programa anterior, dessa vez simulando o giro a esquerda, ou seja:
@@ -108,7 +108,7 @@ Exemplo de funcionamento do programa:
 
 ```python
 >>> Digite uma direção (N, L, S, O): N
->>> A direção a esquerda de N é O
+>>> A direção à esquerda de N é O
 ```
 
 4. A partir do dicionário abaixo:
