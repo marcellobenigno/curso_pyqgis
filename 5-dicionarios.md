@@ -99,7 +99,7 @@ Exemplo de funcionamento do programa:
 >>> A direção a direita de N é L
 ```
 
-1. Repita o programa anterior, dessa vez simulando o giro a esquerda, ou seja:
+3. Repita o programa anterior, dessa vez simulando o giro a esquerda, ou seja:
 * O usuário digitou N: o programa deve devolver a direção Oeste -> O
 * O usuário digitou O: o programa deve devolver a direção Sul -> S
 * O usuário digitou S: o programa deve devolver a direção Leste -> L
