@@ -52,7 +52,15 @@ QgsProject.instance().addMapLayer(vlayer)
 
 Existem vários outros tipos de dados que podem ser carregados de forma análoga ao que foi mostrado: csv, wms, wfs, geodatabase (ESRI), dentre outros. Pesquise sobre como carregar estes outros formatos.
 
-## 3.4 Adicionando Layers WMS
+## 3.4 Adicionando XYZ Tiles e Layers WMS
+
+```python
+uri = "url=http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png&zmax=19&zmin=0&type=xyz" 
+
+osm = iface.addRasterLayer(uri, 'osm', 'wms')
+```
+
+Ou podemos adicionar através da instância do projeto:
 
 ```python
 project = QgsProject.instance()
@@ -65,5 +73,25 @@ project.addMapLayer(osm_layer)
 
 project.write()
 ```
-
 ![](.pastes/2020-02-16-09-23-52.png)
+
+Para adicionar uma camada do **Google Maps**, o procedimento é o seguinte:
+
+```python
+import requests
+service_url = "https://mt1.google.com/vt?"
+service_params= 'lyrs=y&x={x}&y={y}&z={z}'
+service_uri = 'tilePixelRatio=1&type=xyz&url='
+service_uri +=f'{service_url}{requests.utils.quote(service_params)}'
+service_uri +='&zmax=18&zmin=0'
+
+gmaps_satellite = iface.addRasterLayer(service_uri, 'gmaps', 'wms')
+```
+
+Experimente trocar a letra **y** logo após ao parâmetro `lyrs=` para as seguintes letras:
+
+* lyrs=**s**&x={x}&y={y}&z={z}
+* lyrs=**p**&x={x}&y={y}&z={z}
+* lyrs=**m**&x={x}&y={y}&z={z}
+
+E veja o que acontece com o mapa.

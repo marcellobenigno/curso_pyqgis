@@ -11,7 +11,7 @@ mc = iface.mapCanvas()
 Através da manipulação da variável `mc` é possível modificar o nível de zoom, alterar a escala, trocar a cor do background, dentre outras possibilidades, tais como:
 
 ```python
-# obter o layer corrente:
+# obter o layer ativo:
 current_layer = mc.currentLayer()
 
 # obter a lista dos layers que estão visíveis:
@@ -36,7 +36,19 @@ lotes = QgsProject.instance().mapLayersByName('lotes')[0]
 
 💡 Explicando: acessamos a instância do projeto atual `QgsProject.instance()` e através do método `mapLayersByName()` passamos como parâmetro o nome da camada em questão. o resultado deste processo é uma lista com um único elemento e por essa razão, utilizamos o índice `[0]` para pegar o primeiro elemento desta lista.
 
-## 2.1 Acessando Informações da Camada
+## Obtendo um layer através do seu índice:
+
+Também podemos acessar uma camada através de seu índice, na ordem em que elas são listadas no paiel de layers. Exemplo: para acessar a camada da figura abaixo, poderíamos fazer da seguinte forma:
+
+![](.pastes/2020-03-26-09-03-45.png)
+
+```python
+sedes = iface.mapCanvas().layer(0)
+trechos = iface.mapCanvas().layer(1)
+municipios = iface.mapCanvas().layer(2)
+```
+
+## 2.1 Acessando Informações da Camada:
 
 Quantidade de feições da camada:
 
