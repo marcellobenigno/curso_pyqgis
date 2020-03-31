@@ -20,7 +20,7 @@ checked_layers = mc.layers()
 
 Trocando o background do canvas:
 ```
-iface.mapCanvas().setCanvasColor(QColor(255, 255, 0))
+iface.mapCanvas().setCanvasColor(QColor(0, 153, 255))
 
 iface.mapCanvas().refresh()
 ```
