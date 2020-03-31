@@ -18,9 +18,10 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 
 #### [1. Introdução ao PyQGIS][1]
 #### [2. Acessando Camadas][2]
-#### [3. Adicionando Layers][3]
-#### [4. Acessando os Atributos de um Layer][4]
+#### [3. Adicionando Camadas][3]
+#### [4. Acessando os Atributos de uma Camada][4]
 #### [5. Selecionando Feições Através de Expressões SQL][5]
+#### [6. Criando Camadas Vetoriais][6]
 
 
 ### Links e vídeos:
@@ -73,9 +74,10 @@ Leituras:
 
 [1]:1-introducao-ao-pyqgis.md
 [2]:2-acessando-camadas.md
-[3]:3-adicionando-layers.md
-[4]:4-acessando-os-atributos-de-um-layer.md
+[3]:3-adicionando-camadas.md
+[4]:4-acessando-os-atributos-de-uma-camada.md
 [5]:5-selecionando-feicoes-atraves-de-expressoes-sql.md
+[6]:6-criando-camadas-vetoriais.md
 
 
 

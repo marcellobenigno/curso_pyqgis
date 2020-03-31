@@ -1,6 +1,6 @@
-# 3. Adicionando Layers
+# 3. Adicionando Camadas
 
-## 3.1 Adicionando Layers Vetoriais
+## 3.1 Adicionando Camadas Vetoriais
 
 Para adicionar uma nova camada no QGIS, é necessário saber o local exato do arquivo:
 
@@ -23,10 +23,10 @@ municipios = iface.addVectorLayer(path, 'municipios', 'ogr')
 O método `addVectorLayer` recebe três parâmetros:
 
 * O caminho até o arquivo, neste caso a variável path;
-* O nome do layer que será exibido, após o seu carregamento, e
+* O nome da camada que será exibido, após o seu carregamento, e
 * O **provider**, que é uma espécie de driver utilizado para carregar determinado tipo de dado. mais informações sobre o provider podem ser encontradas no link abaixo: 
 
-## 3.2 Adicionando Layers Raster
+## 3.2 Adicionando Camadas Raster
 
 Assim como para as camadas vetoriais, também existe um método responsável por carregar os dados no formato raster chamado `addRasterLayer`:
 
@@ -36,7 +36,7 @@ path = 'Users/code/qgis/pbdata/SB-25-Y-A.tif'
 srtm = iface.addRasterLayer(path, 'srtm', 'gdal')
 ```
 
-## 3.3 Adicionando Layers do PostGIS
+## 3.3 Adicionando Camadas do PostGIS
 
 Para acessar uma camada do PostGIS, devemos utilizar a classe `QgsDataSourceUri`, ela possui os componentes de um URI de um SGBDE, incluindo host, banco de dados, nome de usuário, senha, esquema, e a cláusula `where`, quando necessária.
 
@@ -52,12 +52,24 @@ QgsProject.instance().addMapLayer(vlayer)
 
 Existem vários outros tipos de dados que podem ser carregados de forma análoga ao que foi mostrado: csv, wms, wfs, geodatabase (ESRI), dentre outros. Pesquise sobre como carregar estes outros formatos.
 
-## 3.4 Adicionando XYZ Tiles e Layers WMS
+## 3.4 Adicionando Camadas CSV:
 
 ```python
-uri = "url=http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png&zmax=19&zmin=0&type=xyz" 
+folder = '/Users/marcello/code/curso_pyqgis/dados/'
+uri = f'{folder}pocos_pb.csv?delimiter={";"}&xField={"x"}&yField={"y"}'
+vlayer = QgsVectorLayer(uri, "pocos", "delimitedtext")
+```
 
-osm = iface.addRasterLayer(uri, 'osm', 'wms')
+## 3.5 Adicionando XYZ Tiles e Camadas WMS
+
+```python
+folder = '/Users/marcello/code/curso_pyqgis/dados/'
+
+uri = f"file:{folder}pocos_pb.csv?type=csv&detectTypes=yes&xField={'x'}&yField={'y'}&crs=EPSG:{4326}"
+
+csv = QgsVectorLayer(uri, 'pocos', 'delimitedtext')
+
+QgsProject.instance().addMapLayer(csv)
 ```
 
 Ou podemos adicionar através da instância do projeto:

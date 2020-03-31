@@ -1,6 +1,6 @@
-# Acessando os Atributos de um Layer
+# Acessando os Atributos de uma Camada
 
-Podemos visualizar os campos de um layer da seguinte forma:
+Podemos visualizar os campos de uma camada da seguinte forma:
 
 ```python
 layer = QgsProject.instance().mapLayersByName('municipios')[0]
