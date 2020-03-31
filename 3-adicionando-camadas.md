@@ -56,8 +56,10 @@ Existem vários outros tipos de dados que podem ser carregados de forma análoga
 
 ```python
 folder = '/Users/marcello/code/curso_pyqgis/dados/'
-uri = f'{folder}pocos_pb.csv?delimiter={";"}&xField={"x"}&yField={"y"}'
-vlayer = QgsVectorLayer(uri, "pocos", "delimitedtext")
+uri = f"file:{folder}pocos_pb.csv?type=csv&detectTypes=yes&xField={'x'}&yField={'y'}&crs=EPSG:{4326}"
+csv = QgsVectorLayer(uri, 'pocos', 'delimitedtext')
+
+QgsProject.instance().addMapLayer(csv)
 ```
 
 ## 3.5 Adicionando XYZ Tiles e Camadas WMS
