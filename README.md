@@ -49,6 +49,7 @@ Canais no YouTube:
 1. [Canal Geocast Brasi](https://www.youtube.com/channel/UCLAeX4dyujMoy4xqHvxSDpQ/featured)
 2. [Canal Open Source Options](https://www.youtube.com/channel/UCOSeGDrlScCNgBcN5C8nTEw)
 3. [Curso de Programación QGIS 3 con Python](https://www.youtube.com/user/UPM/search?query=pyqgis)
+4. [QGIS Python Programming Tutorial - PyQGIS](https://www.geodose.com/p/pyqgis.html)
 
 Udemy:
 
