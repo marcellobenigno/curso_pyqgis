@@ -49,7 +49,6 @@ Canais no YouTube:
 1. [Canal Geocast Brasi](https://www.youtube.com/channel/UCLAeX4dyujMoy4xqHvxSDpQ/featured)
 2. [Canal Open Source Options](https://www.youtube.com/channel/UCOSeGDrlScCNgBcN5C8nTEw)
 3. [Curso de Programación QGIS 3 con Python](https://www.youtube.com/user/UPM/search?query=pyqgis)
-4. [QGIS Python Programming Tutorial - PyQGIS](https://www.geodose.com/p/pyqgis.html)
 
 Udemy:
 
@@ -63,6 +62,7 @@ Leituras:
 4. [Repositório do Canal Geocast Brasil](https://gitlab.com/geocastbrasil/livepyqgis)
 5. [QGIS-Python programming](https://github.com/volaya/qgis-python-course)
 6. [Cheat sheet for PyQGIS](https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/cheat_sheet.html)
+7. [QGIS Python Programming Tutorial - PyQGIS](https://www.geodose.com/p/pyqgis.html)
 
 
 [a]:1-introducao-a-linguagem.md
