@@ -1,0 +1,7 @@
+[general]
+name=Geometry Operations
+description=Geometry Operations
+version=1.0
+qgisMinimumVersion=3.0
+author=Matthias Kuhn / Germán Carrillo
+email=matthias@opengis.ch

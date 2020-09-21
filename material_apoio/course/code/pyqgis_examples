@@ -1,0 +1,12 @@
+# Get the active layer
+iface.activeLayer()
+layer = iface.activeLayer()
+
+# Count the features of the layer
+layer.featureCount()
+
+# Print each feature
+layer.getFeatures()
+features = layer.getFeatures()
+for feat in features:
+    print(feat)

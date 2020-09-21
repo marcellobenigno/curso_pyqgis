@@ -1,0 +1,65 @@
+# Imprimer un text ou une variable
+print('Hello, World!')
+
+# Definir des variables
+a = 1
+b = 'deux'
+a = b
+
+print(a)
+print(b)
+
+# Imprimer avec format
+un = 'a'
+deux = 'b'
+print('variable un: {}, variable deux: {}'.format(un, deux))
+
+print('variable un: {0}, variable deux: {1}, variable un: {0}'.format(un, deux))
+
+
+# Creer une list
+list = [1, 'deux', 3, True]
+print(list)
+
+# Ajouter un element à la liste
+list.append(10)
+print(list)
+
+# Parcourire la liste 
+for i in list:
+    print(i)
+
+# Prendre une partie de la liste
+print(list[0])
+print(list[0:3])
+print(list[-1])
+
+# Operations mathematiques
+print(10*2)
+print(10/3)
+print(10/3.0)
+print(10//3.0)
+print(10%3)
+print(10**3)
+
+# Prendre le layer actif
+iface.activeLayer()
+layer = iface.activeLayer()
+
+# Compter les features dans le layer
+layer.featureCount()
+
+# Parcourire les features
+layer.getFeatures()
+features = layer.getFeatures()
+for feat in features:
+    print(feat)
+
+# Gerer les Exceptions
+a = 1/0
+try:
+    a = 1/0
+except:
+    print('no no no')
+
+
