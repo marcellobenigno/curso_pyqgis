@@ -1,33 +1,38 @@
-lyr_pol = QgsVectorLayer("Polygon?crs=epsg:4326", "area_teste", "memory")
+poligono = QgsVectorLayer("Polygon?crs=epsg:4326", "area_teste", "memory")
 
-QgsProject.instance().addMapLayer(lyr_pol)
+QgsProject.instance().addMapLayer(poligono)
 
-dp_lyr_pol = lyr_pol.dataProvider()
+dp_poligono = poligono.dataProvider()
 
 fields = [QgsField('id', QVariant.Int), QgsField('nome', QVariant.String)]
 
-lyr_pol.dataProvider().addAttributes(fields)
+poligono.dataProvider().addAttributes(fields)
 
-lyr_pol.updateFields()
+poligono.updateFields()
 
-ponto_1 = QgsPointXY(-36.29812, -7.33219)
+pontos_list = [
+    QgsPointXY(-36.29812, -7.33219),
+    QgsPointXY(-36.29345,-6.85121),
+    QgsPointXY(-35.84049,-6.83253),
+    QgsPointXY(-35.88830,-7.29987)
+]
 
-ponto_2 = QgsPointXY(-36.29345,-6.85121)
+geom = QgsGeometry.fromPolygonXY([pontos_list])
 
-ponto_3 = QgsPointXY(-35.84049,-6.83253)
+feature = QgsFeature(poligono.fields())
 
-ponto_4 = QgsPointXY(-35.88830,-7.29987)
+feature.setAttributes([1, 'Polígono de teste...'])
 
-pol_1 = QgsGeometry.fromPolygonXY([[ponto_1, ponto_2, ponto_3, ponto_4]])
+feature.setGeometry(geom)
 
-feature = QgsFeature(lyr_pol.fields())
+poligono.dataProvider().addFeature(feature)
 
-feature.setAttributes([1, 'teste'])
+poligono.updateFields()
 
-feature.setGeometry(pol_1)
+poligono.updateExtents()
 
-lyr_pol.dataProvider().addFeature(feature)
+iface.mapCanvas().refresh()
 
-lyr_pol.updateExtents()
+iface.mapCanvas().setExtent(poligono.extent().buffered(0.3))
 
 iface.mapCanvas().refresh()
