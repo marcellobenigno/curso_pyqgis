@@ -1,6 +1,6 @@
-# 8. Entrada de Dados
+# 7. Entrada de Dados
 
-## 8.1 O Problema
+## 7.1 O Problema
 
 O QGIS não permite a entrada de dados através da função `input()`.
 
@@ -13,7 +13,7 @@ digite o valor: Traceback (most recent call last):
 EOFError: EOF when reading a line
 ```
 
-## 8.2 A Solução:
+## 7.2 A Solução:
 
 ```python
 field_msg = QInputDialog.getText(None, "Nome do Campo" ,"Digite o nome do campo: ")

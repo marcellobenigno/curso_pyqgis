@@ -22,6 +22,7 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 #### [4. Acessando os Atributos de uma Camada][4]
 #### [5. Selecionando Feições Através de Expressões SQL][5]
 #### [6. Criando Camadas Vetoriais][6]
+#### [7. Entrada de Dados][7]
 
 
 ### Links e vídeos:
@@ -79,6 +80,7 @@ Leituras:
 [4]:4-acessando-os-atributos-de-uma-camada.md
 [5]:5-selecionando-feicoes-atraves-de-expressoes-sql.md
 [6]:6-criando-camadas-vetoriais.md
+[7]:7-entrada-dados.md
 
 
 
