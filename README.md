@@ -13,6 +13,7 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 #### [5. Dicionários][e]
 #### [6. Funções][f]
 #### [7. Classes][g]
+#### [8. Exercícios - Python Brasil](https://wiki.python.org.br/ListaDeExercicios)
 
 ### PYQGIS
 
@@ -64,6 +65,7 @@ Leituras:
 5. [QGIS-Python programming](https://github.com/volaya/qgis-python-course)
 6. [Cheat sheet for PyQGIS](https://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/cheat_sheet.html)
 7. [QGIS Python Programming Tutorial - PyQGIS](https://www.geodose.com/p/pyqgis.html)
+8. [Introdução à Programação com Dados Geoespaciais](https://prog-geo.github.io/index.html)
 
 
 [a]:1-introducao-a-linguagem.md

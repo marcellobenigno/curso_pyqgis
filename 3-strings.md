@@ -76,7 +76,7 @@ texto = 'hoje tem aula no IFPB'
 >>> False 
 ```
 
-###  A função format()
+### A função format()
 
 ```python
 nome = 'José'
@@ -107,7 +107,7 @@ len(palavra)
 palavra[0]
 >>> 'b'
 palavra[6]
->>> 'o''
+>>> 'o'
 palavra[0:3]
 >>> 'ben'
 # mesmo resultado da anterior:
@@ -121,32 +121,4 @@ palavra[-3]
 >>> 'g'
 palavra[2:-2]
 >>> 'nig'
-```
-
-### Exercícios:
-
-1. Escreva os textos a seguir capitalizados, exceto as preposições 'da', 'de', 'di', 'do', 'du', 'para'.
-
-```
-'joaquim josé da silva xavier'
-'pedro de souza é filho do joão da silva'
-'fui para joão pessoa passear de barco'
-```
-
-2. Faça um programa que troque o texto 1 pelo texto 2, conforme segue:
-
-```
-texto 1: 'Regis da Silva Santos'
-
-texto 2: 'R3g15 d4 S1lv4 S4nt05'
-```
-1. Faça um programa que leia 2 strings e informe o conteúdo delas seguido do seu comprimento. Informe também se as duas strings possuem o mesmo comprimento e são iguais ou diferentes no conteúdo. A saída do programa deve ser semelhante a saída abaixo:
-```
-Compara duas strings
-String 1: Brasil Hexa 2006
-String 2: Brasil! Hexa 2006!
-Tamanho de "Brasil Hexa 2006": 16 caracteres
-Tamanho de "Brasil! Hexa 2006!": 18 caracteres
-As duas strings são de tamanhos diferentes.
-As duas strings possuem conteúdo diferente.
 ```

@@ -92,34 +92,3 @@ Ford Preto 110
 ```
 
 Observe que todo método dentro de uma classe em python deve possuir como primeiro parâmetro o nome reservado `self`, assim como o `this` em outras linguagens, é uma forma de referenciar o valor daquela instância que está sendo criada ou manipulada.
-
-
-
-Exercícios:
-
-1. Crie uma classe chamada `Fila` que pode ser uma fila de qualquer coisa (supermercado, banco, estacionamento, etc.). Esta classe deve possuir dois métodos:
-* `entrar()`: este método receberá o nome da pessoa que está entrando na fila, colocando-o em uma lista `[]`. A medida que novas pessoas entram, essa lista é povoada através deste método.
-* `sair()`: este método irá remover pela **ordem de entrada** as pessoas que estão na fila e também irá imprimir o nome da pessoa que está saindo.
-
-Exemplo de funcionamento:
-
-```python
->>> supermercado = Fila()
-
->>> supermercado.entrar('Luke')
->>> supermercado.entrar('Yoda')
->>> supermercado.entrar('C3PO')
->>> supermercado.entrar('Darth Vader')
-
->>> print(supermercado.fila)
-['Luke', 'Yoda', 'C3PO', 'Darth Vader']
-
->>> print(supermercado.sair())
-Luke
->>> print(supermercado.sair())
-Yoda
->>> print(supermercado.sair())
-C3PO
->>> print(supermercado.fila)
-['Darth Vader']
-```
