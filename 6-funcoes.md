@@ -69,6 +69,14 @@ print(saudacao("Maria"))
 # >>> Olá, Maria!
 ```
 
+🧭 **Dica prática**
+
+👉 Uma boa forma de lembrar:
+
+- **Parâmetro** → aparece na definição
+
+- **Argumento** → aparece na execução
+
 Funções podem ter **valores padrão**:
 
 ```python
