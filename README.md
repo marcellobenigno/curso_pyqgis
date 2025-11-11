@@ -13,7 +13,12 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 #### [5. Dicionários][e]
 #### [6. Funções][f]
 #### [7. Classes][g]
-#### [8. Exercícios - Python Brasil](https://wiki.python.org.br/ListaDeExercicios)
+
+
+### GeoPandas
+
+#### [1. Introdução ao GeoPandas][gp1]
+
 
 ### PYQGIS
 
@@ -84,6 +89,7 @@ Leituras:
 [6]:6-criando-camadas-vetoriais.md
 [7]:7-entrada-dados.md
 
+[gp1]:geopandas/1-introducao-geopandas.md
 
 
 
