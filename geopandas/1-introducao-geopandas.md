@@ -221,3 +221,101 @@ Datum: World Geodetic System 1984 ensemble
 - Prime Meridian: Greenwich
 
 ```
+
+### Realizando Filtros e Criando Novos GeoDataFrames:
+
+o método `.value_counts()` calcula a frequência de cada valor único dentro da coluna selecionada.
+
+```python
+municipios['mesoregiao'].value_counts()
+```
+
+```
+mesoregiao
+Sertão Paraibano     83
+Agreste Paraibano    66
+Borborema            44
+Litoral Paraibano    30
+Name: count, dtype: int64
+```
+
+Aqui criamos uma consulta lógica que retorna um array booleano indicando as linhas onde a coluna `mesoregiao` é igual a 'Litoral Paraibano'.
+
+
+```python
+query = municipios.mesoregiao == 'Litoral Paraibano'
+
+query.value_counts()
+
+```
+
+```
+mesoregiao
+False    193
+True      30
+Name: count, dtype: int64
+```
+
+```python
+litoral_pb = municipios.loc[query]
+```
+
+Utilizamos o método `.loc[]` para filtrar as linhas correspondentes à consulta anterior e criar um novo GeoDataFrame chamado `litoral_pb`. Este GeoDataFrame contém apenas os municípios da **mesorregião Litoral Paraibano**.
+
+```python
+# condição para a coluna populacao_urbana, com poulação acima de 40.000 habitantes.
+query_pop_urbana = municipios.populacao_urbana > 40000
+municipios_pop_urbana = municipios.loc[query_pop_urbana]
+municipios_pop_urbana.head()
+```
+
+Filtrando Municípios por População Total e Mesorregião:
+
+```python
+query = (municipios.populacao_total > 20000) & (municipios.mesoregiao == 'Sertão Paraibano')
+municipios_sertao_20k = municipios.loc[query]
+municipios_sertao_20k.head()
+```
+
+
+```python
+
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+# Plotando o mapa base (Paraíba)
+fig, ax = plt.subplots(figsize=(10, 10))
+municipios.plot(ax=ax, color='lightgray', edgecolor='black', linewidth=0.5)
+
+# Plotando os municípios do Sertão Paraibano com mais de 20.000 habitantes
+municipios_sertão_20k.plot(ax=ax, color='orange', edgecolor='red', linewidth=1)
+
+# Criando manualmente a legenda
+legend_elements = [
+    mpatches.Patch(facecolor='lightgray', edgecolor='black', label='Todos os Municípios'),
+    mpatches.Patch(facecolor='orange', edgecolor='red', label='Sertão (>20.000 hab)')
+]
+ax.legend(handles=legend_elements, loc='lower left')
+
+# Personalizando o gráfico
+ax.set_title("Municípios do Sertão com Mais de 20.000 hab.", fontsize=12)
+# Reduzindo o tamanho da fonte dos números dos eixos
+ax.tick_params(axis='both', which='major', labelsize=6)  # 'major' para os ticks principais
+
+
+# Exibindo o mapa
+plt.show()
+```
+
+<img src="../imgs/sertao.png" width="700" />
+
+
+### Exercícios:
+
+1. Crie um GeoDataFrame contendo os dados da microregião de Campina Grande
+
+2. Crie um GeoDataFrame contendo os municípios das Mesoregiões da Borborema e do Agreste Paraibano, pesquise pela função isin
+
+3. Identifique e visualize no mapa os municípios que possuem população urbana superior a 50.000 habitantes na mesoregião do "Agreste Paraibano"
+
+4. Pesquise como salvar os resultados dos GeoDataframes gerados em diferentes formatos (shapefile, csv, GeoPackage, etc.)
