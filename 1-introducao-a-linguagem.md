@@ -352,6 +352,40 @@ Escreva um programa que:
 1. Armazene as coordenadas em variáveis com nomes adequados
 2. Exiba as coordenadas formatadas com 2 casas decimais
 3. Verifique e informe se o ponto está **ao norte** do paralelo de referência 9.180.000 m N
+
+```
+NORTE (valores maiores = mais perto do equador)
+        ▲
+        │
+        │  10.000.000 m ──●── EQUADOR  ← origem fictícia (false northing)
+        │                                 evita coordenadas negativas
+        │
+        │   9.800.000 m ──┼──
+        │
+        │   9.600.000 m ──┼──
+        │
+        │   9.400.000 m ──┼──
+        │
+        │   9.200.000 m ──┼──
+        │
+        │  ┌─────────────────────────────────────────────────┐
+        │  │  ZONA AO NORTE DO PARALELO DE REFERÊNCIA        │
+        │  │                                                 │
+        │  │   9.196.500,00 m ──◆── P2  (E = 291200.00)      │
+        │  │                                                 │
+        │  │   9.195.820,14 m ──●── P1  (E = 290543.72)      │
+        │  │                                                 │
+        │  └─────────────────────────────────────────────────┘
+        │
+        │   9.180.000,00 m ──▶── PARALELO DE REFERÊNCIA
+        │                        (linha de verificação)
+        │
+        │   9.160.000 m ──┼──
+        │
+        ▼
+        SUL (valores menores = mais distante do equador)
+```
+
 4. Calcule a **distância** desse ponto a um segundo ponto de coordenadas `E = 291200.00` e `N = 9196500.00` usando a fórmula da distância euclidiana: `d = ((dE² + dN²) ** 0.5)`
 
 Saída esperada:
