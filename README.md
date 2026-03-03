@@ -13,6 +13,11 @@ Uma abordagem utilizando o QGIS e a linguagem Python
 #### [5. Dicionários][e]
 #### [6. Funções][f]
 #### [7. Classes][g]
+#### [8. Laços de Repetição][h]
+#### [9. Tratamento de Exceções][i]
+#### [10. Leitura e Escrita de Arquivos][j]
+#### [11. Módulos e Bibliotecas][k]
+#### [12. Manipulação de JSON e GeoJSON][l]
 
 
 ### GeoPandas
@@ -80,6 +85,11 @@ Leituras:
 [e]:5-dicionarios.md
 [f]:6-funcoes.md
 [g]:7-classes.md
+[h]:8-lacos-de-repeticao.md
+[i]:9-tratamento-de-excecoes.md
+[j]:10-leitura-escrita-arquivos.md
+[k]:11-modulos-e-bibliotecas.md
+[l]:12-json-e-geojson.md
 
 [1]:1-introducao-ao-pyqgis.md
 [2]:2-acessando-camadas.md

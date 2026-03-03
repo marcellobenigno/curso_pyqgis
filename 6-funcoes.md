@@ -1,323 +1,334 @@
-# 5. Funções
+# 6. Funções
 
-Em Python, uma **função** é uma sequência de comandos que executa alguma tarefa e que possui um nome.  
-A sua principal finalidade é nos ajudar a **organizar programas** em pedaços reutilizáveis e legíveis, que correspondem à forma como pensamos a solução de um problema.
+Uma **função** é um bloco de código nomeado e reutilizável que executa uma tarefa específica. Funções organizam o programa em partes menores, evitam repetição e facilitam a manutenção.
 
 ---
 
-## 5.1 Sintaxe básica
-
-A sintaxe de definição de uma função é:
+## Definição e Chamada
 
 ```python
 def nome_da_funcao(parametros):
-    <corpo_da_funcao>
+    """Docstring opcional."""
+    # corpo
     return valor
 ```
 
-- **`def`** → palavra-chave para criar a função.  
-- **`nome_da_funcao`** → identificador escolhido pelo programador.  
-- **`parametros`** → valores de entrada (opcional).  
-- **`return`** → define o que a função devolve (opcional).  
-
----
-
-### Exemplos básicos
+- `def` — palavra-chave para criar a função
+- Parâmetros são opcionais
+- `return` é opcional; sem ele a função retorna `None`
 
 ```python
-def ola_mundo():
-    return 'Olá Mundo!'
+def area_retangulo(base, altura):
+    return base * altura
 
-print(ola_mundo())
-# >>> Olá Mundo!
-```
-
-```python
-def maior_idade():
-    idade = int(input('Digite uma idade: '))
-    msg = 'menor de idade'
-    if idade >= 18:
-        msg = 'maior de idade'
-    return msg
-
-print(maior_idade())
-# >>> Digite uma idade: 17
-# >>> menor de idade
-```
-
-```python
-def triangulo(base, altura):
-    """Calcula a área de um triângulo"""
-    area = (base * altura) / 2
-    return area
-
-print(triangulo(7, 10))
-# >>> 35
+area_retangulo(300, 150)  # 45000
 ```
 
 ---
 
-## 5.2 Parâmetros e argumentos
+## Parâmetros e Argumentos
 
-Parâmetros são variáveis declaradas na função; argumentos são os valores passados na chamada.
+**Parâmetro** → nome na definição. **Argumento** → valor na chamada.
+
+### Posicionais e nomeados
 
 ```python
-def saudacao(nome):
-    return f"Olá, {nome}!"
+def reprojetar(camada, crs_origem, crs_destino):
+    print(f'Reprojetando {camada}: {crs_origem} → {crs_destino}')
 
-print(saudacao("Maria"))
-# >>> Olá, Maria!
+reprojetar('municipios', 'EPSG:4674', 'EPSG:32724')   # posicionais
+reprojetar('municipios', crs_destino='EPSG:32724', crs_origem='EPSG:4674')  # nomeados
 ```
 
-🧭 **Dica prática**
-
-👉 Uma boa forma de lembrar:
-
-- **Parâmetro** → aparece na definição
-
-- **Argumento** → aparece na execução
-
-Funções podem ter **valores padrão**:
+### Valores padrão
 
 ```python
-def potencia(base, expoente=2):
-    return base ** expoente
+def buffer(geometria, distancia_m, dissolve=False, quadrant_segs=16):
+    print(f'Buffer de {distancia_m} m | dissolve={dissolve} | segs={quadrant_segs}')
 
-print(potencia(5))     # usa expoente=2
-print(potencia(5, 3))  # expoente=3
-# >>> 25
-# >>> 125
+buffer('parque', 500)                   # dissolve=False, quadrant_segs=16
+buffer('parque', 500, dissolve=True)    # quadrant_segs=16 mantido
+buffer('parque', 500, quadrant_segs=8)  # dissolve=False mantido
 ```
 
----
+💡 Parâmetros com valor padrão devem vir **depois** dos obrigatórios na definição.
 
-## 5.3 Funções com número arbitrário de argumentos
-
-Às vezes não sabemos com antecedência quantos argumentos a função receberá. Para isso:
-
-### `*args` → múltiplos argumentos posicionais
+### Retornando múltiplos valores
 
 ```python
-def calc_media(*args):
-    media = sum(args)/len(args)
-    return media
+def bbox(pontos):
+    """Retorna (xmin, ymin, xmax, ymax) de uma lista de pontos (x, y)."""
+    xs = [p[0] for p in pontos]
+    ys = [p[1] for p in pontos]
+    return min(xs), min(ys), max(xs), max(ys)
 
-print(calc_media(10, 7, 7))
-# >>> 8.0
-```
-
-### `**kwargs` → múltiplos argumentos nomeados
-
-```python
-def concatenar(**kwargs):
-    resultado = ""
-    for arg in kwargs.values():
-        resultado += f" {arg}"
-    return resultado
-
-print(concatenar(a="Python", b="é", c="muito", d="massa!"))
-# >>> Python é muito massa!
+xmin, ymin, xmax, ymax = bbox([(-36.1, -7.2), (-35.4, -8.1), (-37.0, -6.5)])
+print(xmin, ymin, xmax, ymax)  # -37.0 -8.1 -35.4 -6.5
 ```
 
 ---
 
-## 5.4 Escopo de variáveis
+## `*args` e `**kwargs`
 
-- **Variáveis locais** → criadas dentro da função.  
-- **Variáveis globais** → declaradas fora da função.  
+Usados quando o número de argumentos não é conhecido antecipadamente.
+
+### `*args` — argumentos posicionais variáveis
+
+Empacota argumentos extras em uma **tupla**.
 
 ```python
-x = 10  # variável global
+def media_ponderada(*valores):
+    """Calcula a média de N valores."""
+    return sum(valores) / len(valores)
 
-def exemplo():
-    x = 5  # variável local
-    print("Dentro da função:", x)
+media_ponderada(7.5, 8.0, 9.0)        # 8.166...
+media_ponderada(6.0, 7.0, 8.0, 9.0)  # 7.5
+```
 
-exemplo()
-print("Fora da função:", x)
-# >>> Dentro da função: 5
-# >>> Fora da função: 10
+### `**kwargs` — argumentos nomeados variáveis
+
+Empacota argumentos nomeados extras em um **dicionário**.
+
+```python
+def criar_camada(nome, **metadados):
+    """Cria uma camada com metadados opcionais."""
+    print(f'Camada: {nome}')
+    for chave, valor in metadados.items():
+        print(f'  {chave}: {valor}')
+
+criar_camada('municipios_rn', crs='EPSG:4674', tipo='Polígono', feicoes=167)
 ```
 
 ---
 
-## 5.5 Funções anônimas (lambda)
+## Docstrings
 
-Funções `lambda` são **curtas** e **sem nome**. Geralmente usadas em operações simples.
-
-```python
-quadrado = lambda x: x**2
-print(quadrado(4))
-# >>> 16
-```
-
-Outro exemplo:  
+Documentam a função com uma string logo após `def`. Acessível via `help()` ou `.__doc__`.
 
 ```python
-lista = [1, 2, 3, 4, 5]
-dobro = list(map(lambda x: x*2, lista))
-print(dobro)
-# >>> [2, 4, 6, 8, 10]
-```
+def graus_para_radianos(graus):
+    """
+    Converte um ângulo de graus decimais para radianos.
 
----
+    Parâmetros
+    ----------
+    graus : float
+        Ângulo em graus decimais.
 
-## 5.6 Funções internas (funções dentro de funções)
+    Retorna
+    -------
+    float
+        Ângulo em radianos.
+    """
+    import math
+    return graus * (math.pi / 180)
 
-```python
-def externa(x):
-    def interna(y):
-        return y * 2
-    return interna(x) + 5
-
-print(externa(10))
-# >>> 25
+help(graus_para_radianos)
+graus_para_radianos(180)  # 3.14159...
 ```
 
 ---
 
-## 5.7 Documentação de funções (Docstrings)
+## Escopo de Variáveis
 
-É recomendável documentar funções com **docstrings**:
+Variáveis criadas dentro de uma função são **locais** — não existem fora dela.
 
 ```python
-def soma(a, b):
-    """Retorna a soma de dois números a e b."""
-    return a + b
+FATOR_M2_HA = 10000   # constante global
 
-print(soma.__doc__)
-# >>> Retorna a soma de dois números a e b.
+def converter_area(area_m2):
+    area_ha = area_m2 / FATOR_M2_HA  # lê a global, não altera
+    return area_ha
+
+converter_area(55000)   # 5.5
+print(area_ha)          # NameError: 'area_ha' não existe fora da função
+```
+
+Use `global` apenas quando for estritamente necessário alterar uma variável global — em geral, prefira retornar o valor.
+
+```python
+contador = 0
+
+def registrar_feicao():
+    global contador
+    contador += 1
+
+registrar_feicao()
+registrar_feicao()
+print(contador)  # 2
 ```
 
 ---
 
-# 6. Exercícios resolvidos
+## Funções Lambda (Anônimas)
 
-### Exercício 1
-Crie uma função que receba dois números e retorne o maior deles.
+Funções de uma linha, sem nome, usadas em expressões simples.
 
 ```python
-def maior(a, b):
-    return a if a > b else b
+# Sintaxe
+lambda <parâmetros>: <expressão>
+```
 
-print(maior(10, 7))
-# >>> 10
+```python
+m2_para_ha = lambda x: x / 10000
+m2_para_ha(75000)   # 7.5
+
+# Ordenar lista de pontos pela latitude (índice 1)
+pontos = [('P1', -35.7, -7.2), ('P2', -36.1, -5.8), ('P3', -37.0, -8.1)]
+pontos_ord = sorted(pontos, key=lambda p: p[2])
+# [('P3', -37.0, -8.1), ('P1', -35.7, -7.2), ('P2', -36.1, -5.8)]
+
+# Extrair campo de lista de dicionários
+camadas = [{'nome': 'rodovias', 'feicoes': 4312}, {'nome': 'municipios', 'feicoes': 167}]
+camadas.sort(key=lambda c: c['feicoes'], reverse=True)
+```
+
+💡 Lambda é útil como argumento de `sorted()`, `map()` e `filter()`. Para lógicas mais complexas, use `def`.
+
+---
+
+## Exercícios
+
+### Exercício 1 — Contexto GIS
+
+Escreva uma função `dd_para_dms(graus_decimais)` que converta coordenadas de **graus decimais** para o formato **grau°minuto'segundo"** e retorne uma string formatada.
+
+Fórmula:
+```
+grau  = int(abs(decimal))
+resto = (abs(decimal) - grau) * 60
+min   = int(resto)
+seg   = (resto - min) * 60
+```
+
+Aplique o sinal negativo ao símbolo do hemisfério (`S`/`N` para latitude, `W`/`E` para longitude).
+
+Exemplos de saída:
+```python
+dd_para_dms(-7.2256)   # "7°13'32.16\"S"
+dd_para_dms(-35.7431)  # "35°44'35.16\"W"
 ```
 
 ---
 
-### Exercício 2
-Crie uma função que calcule o fatorial de um número.
+### Exercício 2 — Contexto GIS
 
+Escreva uma função `distancia_euclidiana(p1, p2)` que calcule a distância entre dois pontos `(x, y)` em um plano cartesiano (coordenadas projetadas em metros).
+
+```
+d = sqrt((x2 - x1)² + (y2 - y1)²)
+```
+
+Em seguida, escreva uma segunda função `ponto_mais_proximo(referencia, pontos)` que, dado um ponto de referência e uma lista de pontos, retorne o **ponto mais próximo** usando `distancia_euclidiana` e `min()` com `key=`.
+
+Exemplo:
 ```python
-def fatorial(n):
-    resultado = 1
-    for i in range(1, n+1):
-        resultado *= i
-    return resultado
+base   = (290000, 9195000)
+pontos = [(291200, 9196500), (289500, 9194200), (292000, 9193000)]
 
-print(fatorial(5))
-# >>> 120
+ponto_mais_proximo(base, pontos)  # (289500, 9194200)
 ```
 
 ---
 
-### Exercício 3
-Crie uma função que conte quantas vogais existem em uma string.
+### Exercício 3 — Contexto GIS
+
+Escreva uma função `validar_arquivo_vetor(caminho)` que receba um caminho de arquivo como string e retorne um dicionário com o resultado da validação:
+
+- `'valido'`: `True` ou `False`
+- `'extensao'`: a extensão encontrada
+- `'mensagem'`: descrição do resultado
+
+Extensões vetoriais aceitas: `.shp`, `.gpkg`, `.geojson`, `.kml`, `.gml`
 
 ```python
-def contar_vogais(texto):
-    vogais = "aeiouAEIOU"
-    return sum(1 for letra in texto if letra in vogais)
+validar_arquivo_vetor('dados/municipios_rn.shp')
+# {'valido': True, 'extensao': '.shp', 'mensagem': 'Formato vetorial suportado'}
 
-print(contar_vogais("Python é incrível"))
-# >>> 6
+validar_arquivo_vetor('imagens/relevo.tif')
+# {'valido': False, 'extensao': '.tif', 'mensagem': 'Extensão não suportada'}
+
+validar_arquivo_vetor('relatorio')
+# {'valido': False, 'extensao': '', 'mensagem': 'Arquivo sem extensão'}
 ```
 
 ---
 
-# 7. Lista de exercícios propostos (com soluções)
+### Exercício 4 — Contexto GIS
 
-1. **Função que retorna o quadrado de um número.**
+Escreva uma função `classificar_declividade(graus)` que classifique a declividade conforme a tabela EMBRAPA e retorne a classe como string. Depois, use `map()` com **lambda** para classificar uma lista inteira de valores de declividade de uma só vez.
+
+| Faixa (graus) | Classe |
+|---|---|
+| 0 – 3 | Plano |
+| 3 – 8 | Suave ondulado |
+| 8 – 20 | Ondulado |
+| 20 – 45 | Forte ondulado |
+| > 45 | Montanhoso / Escarpado |
 
 ```python
-def quadrado(n):
-    return n ** 2
+amostras = [1.2, 5.7, 14.3, 32.0, 51.5, 8.0, 2.9]
+
+# Usar map() + lambda para aplicar a função à lista inteira
+resultados = list(map(lambda d: classificar_declividade(d), amostras))
 ```
 
 ---
 
-2. **Função que receba uma lista de números e retorne a soma.**
+### Exercício 5 — Contexto GIS
+
+Escreva uma função `resumo_camada(nome, **atributos)` que use `**kwargs` para receber metadados opcionais de uma camada e exiba um relatório formatado. A função deve:
+
+1. Exibir o nome da camada como cabeçalho
+2. Iterar sobre os metadados e exibir cada par `chave: valor`
+3. Se `'feicoes'` e `'area_total_km2'` estiverem presentes, calcular e exibir a densidade de feições
 
 ```python
-def soma_lista(lista):
-    return sum(lista)
+resumo_camada(
+    'municipios_rn',
+    tipo='Polígono',
+    crs='EPSG:4674',
+    feicoes=167,
+    area_total_km2=52811.0,
+    encoding='UTF-8',
+)
+```
+
+Saída esperada:
+```
+=== municipios_rn ===
+tipo           : Polígono
+crs            : EPSG:4674
+feicoes        : 167
+area_total_km2 : 52811.0
+encoding       : UTF-8
+densidade      : 0.0032 feições/km²
 ```
 
 ---
 
-3. **Função que calcule a média de uma lista.**
+### Exercício 6 — Contexto GIS
 
-```python
-def media(lista):
-    return sum(lista) / len(lista)
+Escreva uma função `snap_para_grade(lon, lat, resolucao=0.5)` que "encaixe" um par de coordenadas geográficas na grade regular mais próxima com a resolução dada.
+
+A lógica de arredondamento para a grade é:
+```
+valor_grade = round(valor / resolucao) * resolucao
 ```
 
----
+Use `resolucao` como parâmetro com **valor padrão** de `0.5` grau.
 
-4. **Função que inverta uma string.**
-
-```python
-def inverter(texto):
-    return texto[::-1]
-```
-
----
-
-5. **Função que receba dois números e retorne o MDC (máximo divisor comum).**
+Em seguida, use **list comprehension** com a função para processar uma lista de pontos:
 
 ```python
-def mdc(a, b):
-    while b:
-        a, b = b, a % b
-    return a
+pontos = [
+    ('P1', -35.73, -7.22),
+    ('P2', -36.18, -5.89),
+    ('P3', -37.04, -8.13),
+]
+
+# Resultado esperado com resolucao=0.5:
+# [('P1', -36.0, -7.0), ('P2', -36.0, -6.0), ('P3', -37.0, -8.0)]
 ```
 
----
-
-6. **Função que receba uma lista e retorne apenas os números pares.**
-
-```python
-def pares(lista):
-    return [x for x in lista if x % 2 == 0]
-```
-
----
-
-7. **Função que calcule a sequência de Fibonacci até `n` termos.**
-
-```python
-def fibonacci(n):
-    seq = [0, 1]
-    while len(seq) < n:
-        seq.append(seq[-1] + seq[-2])
-    return seq[:n]
-```
-
----
-
-8. **Função que converta Celsius para Fahrenheit.**
-
-```python
-def celsius_para_fahrenheit(c):
-    return (c * 9/5) + 32
-```
-
----
-
-9. **Função que conte palavras em uma frase.**
-
-```python
-def contar_palavras(frase):
-    return len(frase.split())
-```
+Exiba os pontos originais e os pontos ajustados lado a lado.

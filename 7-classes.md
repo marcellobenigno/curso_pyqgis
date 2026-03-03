@@ -1,410 +1,351 @@
+# 7. Classes e Orientação a Objetos
 
+**Programação Orientada a Objetos (OOP)** organiza o código em torno de **objetos** — entidades que combinam dados (atributos) e comportamento (métodos).
 
-# 7. Classes e Orientação a Objetos em Python
+Conceitos fundamentais:
 
-## 7.1 Definição
+| Conceito | Definição |
+|---|---|
+| **Classe** | O molde/projeto (ex: `CamadaVetorial`) |
+| **Objeto** | Uma instância concreta da classe (ex: `municipios_rn`) |
+| **Atributo** | Dado do objeto (ex: `nome`, `crs`, `feicoes`) |
+| **Método** | Função do objeto (ex: `reprojetar()`, `exportar()`) |
 
-Uma Classe é o projeto ou molde para a criação de Objetos. Ela encapsula um conjunto de objetos com características e comportamentos similares.
+---
 
-Uma classe define:
+## Definindo uma Classe
 
-* O estado possível dos seus objetos, através de Atributos (dados/variáveis).
+```python
+class NomeDaClasse:
+    def __init__(self, parametros):
+        self.atributo = valor   # atributo de instância
 
-* O comportamento dos seus objetos, através de Métodos (funções).
-
-**Exemplo:** A classe `Veiculo` é o molde.
-
- - Atributos (estado): `fabricante`, `cor`, `número_de_rodas`, `velocidade_atual`.
-
- - Métodos (comportamento): `acelerar()`, `frear()`, `ligar_motor()`.
-
-Um **Objeto** é uma instância concreta dessa classe. Se a classe é o projeto de um carro, o objeto é o carro que saiu da linha de montagem.
-
-## Criando e Instanciando uma Classe
-
-Uma classe em Python é definida com a palavra reservada class:
-
-```Python
-
-class Veiculo:
-    # Conteúdo da classe (atributos e métodos)
-    pass 
+    def metodo(self):
+        pass
 ```
 
-Instanciação: Criar um objeto a partir da classe é chamado de instanciação.
+```python
+class CamadaVetorial:
+    def __init__(self, nome, tipo, crs='EPSG:4674'):
+        self.nome  = nome
+        self.tipo  = tipo
+        self.crs   = crs
+        self.feicoes = 0   # atributo com valor padrão fixo
 
-```Python
-
-# Instanciando a classe Veiculo, criando dois objetos (instâncias)
-v = Veiculo()
+camada = CamadaVetorial('municipios_rn', 'Polígono')
+print(camada.nome)   # 'municipios_rn'
+print(camada.crs)    # 'EPSG:4674'
 ```
 
-## 7.2 Atributos de Classe vs. Atributos de Instância
+---
 
-Existem duas categorias principais de atributos em uma classe:
+## `__init__` e `self`
 
-**Atributos de Classe (ou Estáticos)** 
+- `__init__` é o **construtor** — executado automaticamente ao criar o objeto
+- `self` é a referência ao próprio objeto e deve ser o primeiro parâmetro de todo método
 
-São atributos que pertencem à própria classe e são compartilhados por todas as instâncias dessa classe, a menos que uma instância o sobrescreva. São ideais para valores constantes ou padrões.
-
-
-```Python
-
-class Veiculo:
-    # Atributo de CLASSE: o valor padrão para todos os veículos
-    rodas = 4 
-
-# Acessando o atributo de CLASSE
-print(Veiculo.rodas)
-```
-
-**Exemplo de Acesso e Modificação:**
-
-
-```Python
-
->>> v1 = Veiculo()
->>> v2 = Veiculo()
-
-# Acessando via instância
->>> print(v1.rodas) 
-4
-
-# Sobrescrevendo o atributo APENAS na instância v2
->>> v2.rodas = 6 
->>> print(v2.rodas) 
-6
-
-# O atributo de v1 e da CLASSE continua inalterado
->>> print(v1.rodas) 
-4
->>> print(Veiculo.rodas) 
-4
-
-# Se alterarmos o atributo de CLASSE
->>> Veiculo.rodas = 2 
-
->>> print(v1.rodas) # Reflete a mudança da classe (pois não foi sobrescrito)
-2 
-
->>> print(v2.rodas) # Continua com o valor sobrescrito
-6
-
-```
-
-**Atributos de Instância**
-
-São atributos que pertencem a um objeto específico e não são compartilhados. Cada instância terá sua própria cópia desses atributos. Eles são geralmente inicializados dentro do método especial `__init__()`.
-
-## 7.3 O Método `__init__()` (Construtor)
-
-O método __init__() é o construtor da classe. Ele é chamado automaticamente toda vez que você cria uma nova instância da classe. É o local ideal para receber os dados iniciais e criar os atributos de instância.
-
-**A Palavra-chave `self`**
-
-Todo método dentro de uma classe em Python deve ter o parâmetro obrigatório `self` como o primeiro argumento.
-
-O `self` é uma referência à própria instância que está sendo criada ou manipulada.
-
-Ele permite que você acesse e modifique os atributos e chame outros métodos daquela instância específica (ex: `self.fabricante`).
-
-**Exemplo Completo com `__init__`**
-
-```Python
-
-class Veiculo:
-    # Atributo de Classe
-    rodas = 4 
-
-    # Método Construtor - Inicializa a instância
-    def __init__(self, fabricante, cor, potencia):
-        # Atributos de Instância: criados e inicializados para CADA objeto
-        self.fabricante = fabricante
-        self.cor = cor
-        self.potencia = potencia
-        self.velocidade_atual = 0 # Valor inicial fixo
-
-# Instanciando com argumentos
-v1 = Veiculo(fabricante='Hyundai', cor='Branco', potencia=130)
-v2 = Veiculo(fabricante='Ford', cor='Preto', potencia=110)
-
-# Acessando atributos de INSTÂNCIA
-print(f"v1 é um {v1.fabricante} {v1.cor} com {v1.potencia}cv.")
-# Saída: v1 é um Hyundai Branco com 130cv.
-```
-
-
-## 7.4 Métodos de Instância
-
-Os Métodos definem o comportamento dos objetos. Eles são funções que pertencem à classe e operam sobre os atributos de instância (self).
-
-**Exemplo de Métodos**
-
-Vamos adicionar métodos para simular o comportamento de um veículo:
-
-```Python
-
-class Veiculo:
-    def __init__(self, fabricante, cor, potencia):
-        self.fabricante = fabricante
-        self.cor = cor
-        self.potencia = potencia
-        self.velocidade_atual = 0
-
-    # Método de Instância para acelerar
-    def acelerar(self, incremento):
-        self.velocidade_atual += incremento
-        print(f"O {self.fabricante} acelerou. Velocidade atual: {self.velocidade_atual} km/h.")
-
-    # Método para apresentar a descrição do objeto
-    def descrever(self):
-        return f"Veículo: {self.fabricante} | Cor: {self.cor} | Potência: {self.potencia} CV"
-
-# Instanciando e usando os métodos
-v3 = Veiculo('Toyota', 'Vermelho', 180)
-
-print(v3.descrever()) 
-# Saída: Veículo: Toyota | Cor: Vermelho | Potência: 180 CV
-
-v3.acelerar(50) # O self será o v3
-# Saída: O Toyota acelerou. Velocidade atual: 50 km/h.
-```
-
-
-# 8. Exercícios Resolvidos
-
-### Exercício 1: Classe `ImovelRural`.
-
-Crie uma classe `ImovelRural` com os seguintes atributos de instância (definidos no construtor): `nome_fazenda` e `area_hectares`.
-
-**Solução**
-
-```Python
-class ImovelRural:
-    # O construtor recebe nome e área
-    def __init__(self, nome_fazenda, area_hectares):
-        self.nome_fazenda = nome_fazenda
-        self.area_hectares = area_hectares # Atributo de Instância
-
-    # Método para conversão de área
-    def calcular_area_em_alqueires(self):
-        # 1 alqueire paulista = 2.42 hectares
-        ALQUEIRE_PAULISTA = 2.42
-        area_alqueires = self.area_hectares / ALQUEIRE_PAULISTA
-        # Usamos round para limitar as casas decimais para melhor visualização
-        return round(area_alqueires, 2) 
-
-    # Método para imprimir os detalhes
-    def imprimir_detalhes(self):
-        area_alqueires = self.calcular_area_em_alqueires()
-        print("-" * 30)
-        print(f"Nome: {self.nome_fazenda}")
-        print(f"Área: {self.area_hectares} hectares")
-        print(f"Área: {area_alqueires} alqueires paulistas")
-        print("-" * 30)
-
-# Teste
-i1 = ImovelRural("Fazenda Paraíso", 121)
-i2 = ImovelRural("Sítio Estrela", 48.4)
-
-i1.imprimir_detalhes()
-i2.imprimir_detalhes()
-
-# Saída Esperada:
-# ------------------------------
-# Nome: Fazenda Paraíso
-# Área: 121 hectares
-# Área: 50.0 alqueires paulistas
-# ------------------------------
-# ------------------------------
-# Nome: Sítio Estrela
-# Área: 48.4 hectares
-# Área: 20.0 alqueires paulistas
-# ------------------------------
-```
-
-
-### Exercício 2: Classe Retangulo com Área
-
-Crie uma classe `Retangulo` com atributos `largura` e `altura`. Adicione um método `calcular_area()` que retorna a área do retângulo.
-
-**Solução** 
-
-```Python
-
-class Retangulo:
-    def __init__(self, largura, altura):
-        self.largura = largura
-        self.altura = altura
-
-    def calcular_area(self):
-        return self.largura * self.altura
-
-# Teste
-r1 = Retangulo(10, 5)
-area = r1.calcular_area()
-print(f"A área do retângulo é: {area}") # Saída: 50
-```
-
-### Exercício 3: Atributo de Classe em ContaBancaria
-
-Crie uma classe ContaBancaria com o atributo de classe taxa_saque igual a 5.0. Crie um atributo de instância saldo.
-
-**Solução**
-
-```Python
-
-class ContaBancaria:
-    # Atributo de CLASSE
-    taxa_saque = 5.0 
-
-    def __init__(self, saldo_inicial):
-        # Atributo de INSTÂNCIA
-        self.saldo = saldo_inicial 
-
-# Teste
-conta1 = ContaBancaria(1000)
-print(f"Taxa de saque padrão: R$ {ContaBancaria.taxa_saque}")
-print(f"Saldo da Conta 1: R$ {conta1.saldo}")
-```
-
-
-### Exercício 4: Método para Depositar
-
-Adicione à classe `ContaBancaria` do exercício 3 um método `depositar(valor)` que incrementa o saldo.
-
-**Solução**
-
-```Python
-
-class ContaBancaria:
-    taxa_saque = 5.0 
-
-    def __init__(self, saldo_inicial):
-        self.saldo = saldo_inicial 
-
-    def depositar(self, valor):
-        if valor > 0:
-            self.saldo += valor
-            print(f"Depósito de R$ {valor} realizado. Novo saldo: R$ {self.saldo}")
-        else:
-            print("O valor do depósito deve ser positivo.")
-
-# Teste
-c1 = ContaBancaria(100)
-c1.depositar(250.50)
-```
-
-### Exercício 5: Método para Sacar com Taxa
-
-Adicione à classe ContaBancaria o método sacar(valor). O saque deve debitar o valor mais a taxa_saque do saldo, somente se houver saldo suficiente.
-
-**Solução**
-
-```Python
-
-class ContaBancaria:
-    taxa_saque = 5.0 
-
-    def __init__(self, saldo_inicial):
-        self.saldo = saldo_inicial 
-
-    def sacar(self, valor):
-        custo_total = valor + self.taxa_saque
-        if self.saldo >= custo_total:
-            self.saldo -= custo_total
-            print(f"Saque de R$ {valor} (R$ {self.taxa_saque} de taxa) realizado. Novo saldo: R$ {self.saldo}")
-        else:
-            print(f"Saldo insuficiente. Necessário R$ {custo_total} para saque, mas tem R$ {self.saldo}.")
-
-# Teste
-c2 = ContaBancaria(300)
-c2.sacar(50)  # Saque de 50 + 5 de taxa = 55. Saldo: 245
-c2.sacar(500) # Saldo insuficiente.
-
-```
-
-### Exercício 6: Classe Pessoa com `__str__`
-
-Crie uma classe Pessoa com nome e cidade. Implemente o método especial __str__(self) para retornar uma string formatada que descreve o objeto.
-
-**Solução**
-
-```Python
-
-class Pessoa:
-    def __init__(self, nome, cidade):
+```python
+class PontoGeo:
+    def __init__(self, lon, lat, nome=''):
+        self.lon  = lon
+        self.lat  = lat
         self.nome = nome
-        self.cidade = cidade
+
+    def coordenadas(self):
+        return (self.lon, self.lat)
+
+p = PontoGeo(-35.74, -7.22, 'Base Topográfica')
+p.coordenadas()   # (-35.74, -7.22)
+```
+
+---
+
+## Atributos de Classe vs. de Instância
+
+**Atributos de classe** são compartilhados por todas as instâncias.
+**Atributos de instância** pertencem a cada objeto individualmente.
+
+```python
+class CamadaVetorial:
+    formatos_suportados = ['.shp', '.gpkg', '.geojson']   # atributo de CLASSE
+
+    def __init__(self, nome, tipo):
+        self.nome = nome     # atributo de INSTÂNCIA
+        self.tipo = tipo
+
+CamadaVetorial.formatos_suportados   # acessado pela classe
+camada = CamadaVetorial('rios', 'Linha')
+camada.formatos_suportados           # também acessível pela instância
+```
+
+---
+
+## Métodos Especiais: `__str__` e `__repr__`
+
+| Método | Quando é chamado | Público para |
+|---|---|---|
+| `__str__` | `print(obj)` e `str(obj)` | Usuário final — leitura humana |
+| `__repr__` | Console interativo, `repr(obj)` | Desenvolvedores — debug |
+
+```python
+class PontoGeo:
+    def __init__(self, lon, lat, nome=''):
+        self.lon  = lon
+        self.lat  = lat
+        self.nome = nome
 
     def __str__(self):
-        # O método __str__ é chamado quando usamos print(objeto)
-        return f"{self.nome} mora em {self.cidade}"
+        return f'Ponto "{self.nome}": ({self.lon}, {self.lat})'
 
-# Teste
-p1 = Pessoa("Alice", "São Paulo")
-print(p1) 
-# Saída: Alice mora em São Paulo
+    def __repr__(self):
+        return f'PontoGeo(lon={self.lon}, lat={self.lat}, nome={self.nome!r})'
+
+p = PontoGeo(-35.74, -7.22, 'Sede')
+print(p)    # Ponto "Sede": (-35.74, -7.22)
+repr(p)     # "PontoGeo(lon=-35.74, lat=-7.22, nome='Sede')"
 ```
 
+---
 
-### Exercício 7: Contador de Instâncias
+## Encapsulamento
 
-Crie uma classe `Produto` e use um atributo de classe chamado `quantidade_produtos` para rastrear quantas instâncias de Produto foram criadas. O contador deve ser 
-incrementado no `__init__`.
+Encapsulamento protege atributos de modificação direta inadvertida. Em Python usa-se convenção de nomes:
 
-**Solução**
+| Convenção | Significado |
+|---|---|
+| `self.nome` | Público — acesso livre |
+| `self._nome` | Protegido — não altere de fora (convenção) |
+| `self.__nome` | Privado — Python aplica *name mangling* |
 
-```Python
+```python
+class CamadaVetorial:
+    def __init__(self, nome, feicoes):
+        self.nome      = nome
+        self._feicoes  = feicoes      # protegido
+        self.__encoding = 'UTF-8'     # privado
 
-class Produto:
-    # Atributo de CLASSE para contar instâncias
-    quantidade_produtos = 0
+    def get_encoding(self):
+        return self.__encoding
 
-    def __init__(self, nome, preco):
-        self.nome = nome
-        self.preco = preco
-        # Incrementa o contador de CLASSE toda vez que um objeto é criado
-        Produto.quantidade_produtos += 1 
+    def set_feicoes(self, n):
+        if n < 0:
+            raise ValueError('Número de feições não pode ser negativo')
+        self._feicoes = n
 
-# Teste
-prod_a = Produto("Notebook", 3500)
-prod_b = Produto("Mouse", 80)
-
-print(f"Total de produtos criados: {Produto.quantidade_produtos}") # Saída: 2
+camada = CamadaVetorial('rios', 320)
+camada.get_encoding()       # 'UTF-8'
+camada.set_feicoes(321)
+camada.__encoding           # AttributeError — name mangling
 ```
 
-### Exercício 9: Classe Livro com Status
+---
 
-Crie uma classe `Livro` com `titulo` e `autor`. Adicione um atributo de instância `emprestado` (booleano) inicializado como `False`. Crie os métodos `emprestar()` e `devolver()` para alterar o status.
+## Herança
 
-**Solução**
+Uma classe **filha** herda atributos e métodos da classe **pai** e pode especializá-los.
 
-```Python
+```python
+class Geometria:
+    """Classe base para geometrias."""
+    def __init__(self, crs='EPSG:4674'):
+        self.crs = crs
 
-class Livro:
-    def __init__(self, titulo, autor):
-        self.titulo = titulo
-        self.autor = autor
-        self.emprestado = False # Atributo de instância padrão
+    def tipo(self):
+        return 'Geometria'
 
-    def emprestar(self):
-        if not self.emprestado:
-            self.emprestado = True
-            print(f"O livro '{self.titulo}' foi emprestado.")
-        else:
-            print(f"Erro: O livro '{self.titulo}' já está emprestado.")
+    def __str__(self):
+        return f'{self.tipo()} | CRS: {self.crs}'
 
-    def devolver(self):
-        if self.emprestado:
-            self.emprestado = False
-            print(f"O livro '{self.titulo}' foi devolvido.")
-        else:
-            print(f"Erro: O livro '{self.titulo}' já está na biblioteca.")
 
-# Teste
-l1 = Livro("Padrões de Projeto", "Gang of Four")
-l1.emprestar()      
-l1.devolver()       
+class Ponto(Geometria):
+    def __init__(self, lon, lat, crs='EPSG:4674'):
+        super().__init__(crs)       # chama o __init__ do pai
+        self.lon = lon
+        self.lat = lat
 
+    def tipo(self):
+        return 'Ponto'
+
+    def __str__(self):
+        return f'Ponto ({self.lon}, {self.lat}) | CRS: {self.crs}'
+
+
+class Poligono(Geometria):
+    def __init__(self, vertices, crs='EPSG:4674'):
+        super().__init__(crs)
+        self.vertices = vertices    # lista de tuplas (x, y)
+
+    def tipo(self):
+        return 'Polígono'
+
+    def num_vertices(self):
+        return len(self.vertices)
+
+
+p = Ponto(-35.74, -7.22)
+print(p)             # Ponto (-35.74, -7.22) | CRS: EPSG:4674
+isinstance(p, Geometria)   # True  — Ponto É UMA Geometria
+```
+
+`super()` chama o método da classe pai sem precisar nomear a classe explicitamente.
+
+---
+
+## Exercícios
+
+### Exercício 1 — Classe `PontoGeo`
+
+Crie uma classe `PontoGeo` com atributos `lon`, `lat` e `nome` (padrão `''`). Implemente:
+
+1. `__str__` — exibe `'nome: (lon, lat)'`
+2. `__repr__` — exibe `'PontoGeo(lon=..., lat=..., nome=...)'`
+3. `distancia_para(outro)` — distância euclidiana até outro `PontoGeo`
+4. `para_dms()` — retorna uma tupla de strings `(lon_dms, lat_dms)` no formato `35°44'35"W`
+
+```python
+p1 = PontoGeo(-35.74, -7.22, 'Marco A')
+p2 = PontoGeo(-36.10, -8.01, 'Marco B')
+
+print(p1)                  # Marco A: (-35.74, -7.22)
+p1.distancia_para(p2)      # ~0.871 (graus — distância aproximada)
+p1.para_dms()              # ("35°44'24\"W", "7°13'12\"S")
+```
+
+---
+
+### Exercício 2 — Classe `CamadaVetorial`
+
+Crie uma classe `CamadaVetorial` com:
+
+**Atributo de classe:**
+- `formatos_suportados = ['.shp', '.gpkg', '.geojson', '.kml']`
+
+**Atributos de instância (no `__init__`):**
+- `nome`, `tipo` (Ponto/Linha/Polígono), `crs` (padrão `'EPSG:4674'`)
+- `_feicoes = 0` (protegido)
+- `_campos = []` (protegido)
+
+**Métodos:**
+- `adicionar_campo(nome_campo)` — adiciona à lista `_campos`
+- `definir_feicoes(n)` — valida que `n >= 0` antes de atribuir
+- `resumo()` — exibe um relatório formatado com todos os atributos
+- `__str__` — retorna `'[tipo] nome (n feições)'`
+
+```python
+camada = CamadaVetorial('municipios_rn', 'Polígono')
+camada.adicionar_campo('cd_mun')
+camada.adicionar_campo('nm_mun')
+camada.definir_feicoes(167)
+print(camada)      # [Polígono] municipios_rn (167 feições)
+camada.resumo()
+```
+
+---
+
+### Exercício 3 — Herança: `Geometria`, `Ponto`, `Linha`, `Poligono`
+
+Implemente a hierarquia abaixo usando herança:
+
+```
+Geometria  (base)
+├── Ponto
+├── Linha
+└── Poligono
+```
+
+**`Geometria` (base):**
+- `__init__(self, crs='EPSG:4674')`
+- `tipo()` → `'Geometria'`
+- `is_valida()` → `NotImplementedError` (força implementação nas filhas)
+- `__str__` → `'[tipo] | CRS: crs'`
+
+**`Ponto`:**
+- `__init__(lon, lat, crs)` — chama `super()`
+- `tipo()` → `'Ponto'`
+- `is_valida()` → `True` se lon ∈ [-180, 180] e lat ∈ [-90, 90]
+
+**`Linha`:**
+- `__init__(vertices, crs)` — `vertices` é lista de tuplas `(x, y)`
+- `tipo()` → `'Linha'`
+- `is_valida()` → `True` se tiver ao menos 2 vértices
+- `comprimento()` → soma das distâncias euclidianas entre vértices consecutivos
+
+**`Poligono`:**
+- `__init__(vertices, crs)` — `vertices` é lista de tuplas `(x, y)`
+- `tipo()` → `'Polígono'`
+- `is_valida()` → `True` se tiver ao menos 3 vértices
+- `perimetro()` → soma das distâncias entre vértices consecutivos (inclusive o fechamento)
+
+```python
+p = Ponto(-35.74, -7.22)
+l = Linha([(0, 0), (3, 0), (3, 4)])
+pol = Poligono([(0,0), (4,0), (4,3), (0,3)])
+
+print(p)            # [Ponto] | CRS: EPSG:4674
+p.is_valida()       # True
+l.comprimento()     # 7.0
+pol.perimetro()     # 14.0
+
+isinstance(l, Geometria)   # True
+```
+
+---
+
+### Exercício 4 — Classe `ProjecaoUTM`
+
+Crie uma classe `ProjecaoUTM` que encapsule informações de uma projeção UTM e ofereça métodos de cálculo e validação.
+
+**Atributos de instância:**
+- `zona` (int, 1–60)
+- `hemisferio` (`'N'` ou `'S'`)
+- `datum` (padrão `'SIRGAS2000'`)
+
+**Atributo de classe:**
+- `_epsg_base = {'SIRGAS2000': 31900, 'WGS84': 32600}` — base para calcular o código EPSG
+
+**Métodos:**
+- `epsg()` — calcula e retorna o código EPSG completo:
+  - SIRGAS 2000 Sul: 31900 + zona → ex: zona 24 = `31924`
+  - WGS 84 Sul: 32700 + zona → ex: zona 24 = `32724`
+  - WGS 84 Norte: 32600 + zona
+- `is_valida()` → `True` se zona ∈ [1, 60] e hemisferio ∈ ['N', 'S']
+- `__str__` → ex: `'UTM Zona 24S | SIRGAS2000 | EPSG:31924'`
+
+```python
+utm = ProjecaoUTM(zona=24, hemisferio='S')
+print(utm)          # UTM Zona 24S | SIRGAS2000 | EPSG:31924
+utm.epsg()          # 31924
+utm.is_valida()     # True
+
+ProjecaoUTM(61, 'S').is_valida()   # False
+```
+
+---
+
+### Exercício 5 — Classe `BoundingBox`
+
+Crie uma classe `BoundingBox` para representar e operar sobre extensões espaciais.
+
+**Atributos:** `xmin`, `ymin`, `xmax`, `ymax`
+
+**Métodos:**
+- `is_valida()` → `True` se `xmin < xmax` e `ymin < ymax`
+- `largura()` e `altura()` → diferença entre os extremos
+- `area()` → largura × altura
+- `centro()` → tupla `(cx, cy)` com o centroide da bbox
+- `contem_ponto(lon, lat)` → `True` se o ponto estiver dentro da bbox
+- `intersecta(outra)` → `True` se houver sobreposição com outra `BoundingBox`
+- `buffer(distancia)` → retorna uma **nova** `BoundingBox` expandida em `distancia` em todas as direções
+- `__str__` → `'BBox: (xmin, ymin, xmax, ymax)'`
+
+```python
+rn  = BoundingBox(-38.00, -8.00, -34.97, -4.49)
+nat = BoundingBox(-35.30, -5.95, -35.15, -5.73)
+
+print(rn)               # BBox: (-38.0, -8.0, -34.97, -4.49)
+rn.area()               # ~9.18
+rn.centro()             # (-36.485, -6.245)
+rn.contem_ponto(-35.74, -5.79)   # True
+rn.intersecta(nat)               # True
+rn.buffer(0.5)          # BoundingBox(-38.5, -8.5, -34.47, -3.99)
 ```
