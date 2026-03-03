@@ -1,104 +1,223 @@
-# 2.  Desvios Condicionais
+# 2. Desvios Condicionais
 
-Para criar um desvio condicional utilizamos o comando `if`. É avaliada a condição para que uma sequência de comandos seja executada.
+Desvios condicionais permitem que o programa tome **decisões** com base em condições. O bloco de código só é executado se a condição for avaliada como `True`.
 
-![if](.pastes/2019-09-04-07-42-41.png)
+---
 
-Figura extraída do site [Real Python](https://realpython.com/python-conditional-statements/)
-
-### Exemplos:
+## `if` / `else`
 
 ```python
-idade = 5
-
-if idade < 18:
-    print("menor de idade")
+if <condição>:
+    # executado se a condição for True
 else:
-    print("maior de idade")
+    # executado se a condição for False
 ```
-Interagindo com o usuário através da função `input`:
-```python
-idade = int(input("Digite sua idade"))
 
-if idade < 18:
-    print("menor de idade")
+> A indentação (recuo de 4 espaços) delimita o bloco. Não há chaves `{}` como em outras linguagens.
+
+**Exemplo:**
+
+```python
+area_ha = 8.5
+
+if area_ha >= 10:
+    print('Imóvel rural — área mínima atingida')
 else:
-    print("maior de idade")
+    print('Imóvel rural — área abaixo do mínimo')
 ```
 
-💣  Cuidado! a função `input` sempre vai retornar uma string, esteja atento a isso.
-
-### Operadores de Comparação:
-
-```
-==	Igual
-!=	Diferente
->	Maior que
-<	Menor que
->=	Maior ou igual que
-<=	Menor ou igual que
-```
-
-### `elif` (else if, se não se):
-
-Em alguma situações precisamos encadear várias condições de teste em um programa, para isso, podemos juntar o comando `else` com o `if`. No python temos um comando que faz justamente isso para nós, o `elif` (else + if). com ele podemos passar mais uma condição e realizar vários testes em sequência. O `elif` segue a mesma ideia do `if` e do `else`. Caso a condição passada para ele seja verdadeira, é executado seu bloco de código baseado no **alinhamento**.
+Com entrada do usuário:
 
 ```python
-idade = 30
+area_ha = float(input('Digite a área em hectares: '))
 
-if idade >= 65:
-    print("passagem gratuita")
-elif idade >= 18:
-    print("passagem inteira")
+if area_ha >= 10:
+    print('Área suficiente')
 else:
-    print("meia passagem")
+    print('Área insuficiente')
 ```
 
-```python
-x = 44
+💣 `input()` sempre retorna `str` — converta com `int()` ou `float()` antes de comparar com números.
 
-if x > 100:
-    print("x maior que 100")
-elif x > 50:
-    print("x maior que 50 e menor ou igual que 100")
-elif x > 0:
-    print("x maior que 0 e menor ou igual que 50")
+---
+
+## `elif` — múltiplas condições
+
+Quando há mais de dois casos, use `elif` (abreviação de *else if*):
+
+```python
+if <condição 1>:
+    ...
+elif <condição 2>:
+    ...
+elif <condição 3>:
+    ...
 else:
-    print("x menor ou igual que 0")
+    ...
 ```
 
-### Operadores Ternários:
-
-Um operador ternário é definido em Python da seguinte forma:
+**Exemplo — classificação de declividade (EMBRAPA):**
 
 ```python
-<expr1> if <conditional_expr> else <expr2>
-```
+declividade = 18  # em graus
 
-Logo, a expressão abaixo:
-
-```python
-if a > b:
-  m = a
+if declividade <= 3:
+    classe = 'Plano'
+elif declividade <= 8:
+    classe = 'Suave ondulado'
+elif declividade <= 20:
+    classe = 'Ondulado'
+elif declividade <= 45:
+    classe = 'Forte ondulado'
 else:
-  m = b
+    classe = 'Montanhoso / Escarpado'
+
+print(f'Classe de relevo: {classe}')
 ```
 
-Pode ser representada da seguinte forma:
+💡 O Python avalia as condições de cima para baixo e executa apenas o **primeiro bloco** cuja condição seja verdadeira.
+
+---
+
+## Operadores de Comparação
+
+Retornam `True` ou `False`.
+
+| Operador | Significado | Exemplo |
+|---|---|---|
+| `==` | Igual a | `crs == 'EPSG:4326'` |
+| `!=` | Diferente de | `tipo != 'Ponto'` |
+| `>` | Maior que | `area > 100` |
+| `<` | Menor que | `vertices < 500` |
+| `>=` | Maior ou igual | `escala >= 1000` |
+| `<=` | Menor ou igual | `populacao <= 50000` |
+
+---
+
+## Operadores Lógicos
+
+Combinam duas ou mais condições.
+
+| Operador | Resultado `True` quando... | Exemplo |
+|---|---|---|
+| `and` | **ambas** as condições são `True` | `area > 5 and municipio == 'RN'` |
+| `or` | **ao menos uma** condição é `True` | `tipo == 'Rio' or tipo == 'Lago'` |
+| `not` | a condição é `False` | `not reprojetado` |
 
 ```python
-m = a if a > b else b
+lon = -36.5
+lat = -5.8
+
+# Verificar se o ponto está dentro de uma bounding box
+if lon >= -38.0 and lon <= -35.0 and lat >= -7.0 and lat <= -4.0:
+    print('Ponto dentro da área de interesse')
+else:
+    print('Ponto fora da área de interesse')
 ```
 
-### O Statement `pass`:
+---
 
-O `pass`significa que após a avaliação da condição, não será feito nada (passe...), exemplo:
+## Operadores de Pertencimento e Identidade
+
+| Operador | Uso |
+|---|---|
+| `in` | Verifica se um valor está em uma sequência |
+| `not in` | Verifica se um valor **não** está em uma sequência |
+| `is` | Verifica se dois nomes apontam para o **mesmo objeto** |
+| `is not` | Negação do `is` |
 
 ```python
-if True:
-    pass
+formatos_suportados = ['shp', 'gpkg', 'geojson', 'kml']
+extensao = 'gpkg'
 
-print('foo')
+if extensao in formatos_suportados:
+    print('Formato aceito')
+else:
+    print('Formato não suportado')
 ```
-O `pass` é mais utilizando quando ainda não estamos certo do que queremos fazer no código, como na definição de uma classe ou de uma função, por exemplo. Mas isso é papo para outra hora 😛 
 
+```python
+resultado = None
+
+if resultado is None:
+    print('Sem resultado — verifique a camada de entrada')
+```
+
+---
+
+## Operador Ternário
+
+Forma compacta para `if/else` em uma única linha:
+
+```python
+<valor_se_true> if <condição> else <valor_se_false>
+```
+
+```python
+area_ha = 23.5
+situacao = 'apto' if area_ha >= 10 else 'inapto'
+print(f'Imóvel: {situacao}')  # Imóvel: apto
+```
+
+Use com moderação — prefira o `if/else` convencional quando a lógica for mais complexa.
+
+---
+
+## O Statement `pass`
+
+Usado como **marcador** quando a sintaxe exige um bloco mas ainda não há lógica definida:
+
+```python
+tipo_geometria = 'Polígono'
+
+if tipo_geometria == 'Ponto':
+    pass  # TODO: implementar lógica para pontos
+elif tipo_geometria == 'Linha':
+    pass  # TODO: implementar lógica para linhas
+else:
+    print('Geometria do tipo Polígono')
+```
+
+---
+
+## Exercícios
+
+### Exercício 1
+
+Solicite ao usuário um número inteiro e informe se ele é **positivo**, **negativo** ou **zero**.
+
+---
+
+### Exercício 2
+
+Solicite ao usuário duas notas (de 0 a 10) e calcule a média. Exiba a situação do aluno conforme a tabela:
+
+| Média | Situação |
+|---|---|
+| `>= 7.0` | Aprovado |
+| `>= 5.0` e `< 7.0` | Recuperação |
+| `< 5.0` | Reprovado |
+
+---
+
+### Exercício 3 — Contexto GIS
+
+O **INCRA** classifica imóveis rurais por módulos fiscais. Escreva um programa que:
+
+1. Solicite ao usuário a **área do imóvel em hectares** e o **módulo fiscal do município** (em hectares)
+2. Calcule a quantidade de módulos fiscais do imóvel
+3. Classifique e exiba o imóvel conforme a tabela abaixo:
+
+| Tamanho | Classificação |
+|---|---|
+| Até 1 módulo fiscal | Minifúndio |
+| De 1 a 4 módulos fiscais | Pequena propriedade |
+| De 4 a 15 módulos fiscais | Média propriedade |
+| Acima de 15 módulos fiscais | Grande propriedade |
+
+Exemplo de saída esperada:
+```
+Área: 85.0 ha | Módulo fiscal: 20 ha
+Quantidade de módulos: 4.25
+Classificação: Média propriedade
+```

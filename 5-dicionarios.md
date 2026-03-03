@@ -1,150 +1,266 @@
 # 5. Dicionários
 
-Um dicionário é um tipo de dado integrado do python e é usado basicamente para mapear chaves e valores. Esse comportamento é utilizado tanto para manipulação quanto para armazenamento de dados.
+Um dicionário (`dict`) é uma coleção de pares **chave → valor**, não ordenada por inserção¹, mutável e sem chaves duplicadas. É ideal para representar objetos com atributos nomeados — como feições geográficas.
 
-Os índices(chaves) podem ser de praticamente qualquer tipo de valor e estão associadas a somente um valor.
-
-Exemplo de uma estrutura dicionário:
+¹ *A partir do Python 3.7 a ordem de inserção é preservada.*
 
 ```python
-imovel = { 'matricula' : 111 , 'quadra' : 10 , 'area_m2': 300 }
-```
-
-### Acessando os Dados do Dicionário
-
-Para acessar um determinado valor que compõe o dicionário, podemos fazer:
-
-```python
-print(imovel['matricula'])
-
->>> 111
-```
-
-Os dicionários também possuem métodos para o acesso do seu conteúdo:
-
-* `dict.items()` -> retorna uma tupla com o formato(chave , valor)
-* `dict.keys()` -> retorna as chaves do dicionário
-
-### Iterando um Dicionário:
-
-A forma mais usual de iterar um dicionário é realizada da seguinte forma:
-
-```python
-for key, value in imovel.items():
-    print(value, 'é o valor da', key)
-    
-    
->>> 111 é o valor da matricula
->>> 10 é o valor da quadra
->>> 300 é o valor da area_m2
-```
-
-### Alterando o Valor de uma Chave
-
-```python
-imovel['matricula'] = 222
-
-print(imovel)
-
->>> {'matricula': 222, 'quadra': 10, 'area_m2': 300}
-```
-
-Também podemos atualizar um dicionário com o método `dict.update()`:
-
-
-```python
-imovel.update({'quadra': 25, 'area_m2': 630, 'proprietario': 'João'})
-
-print(imovel)
-
->>> {'matricula': 222, 'quadra': 25, 'area_m2': 630, 'proprietario': 'João'}
-```
-
-Caso uma chave não exista, ela é então adicionada, como é o caso de `proprietario`.
- 
-
-### Excluindo Itens
-
-Para remover uma chave-valor de um dicionário, podemos usar o `del dict[key]`:
-
-```python
-del imovel['proprietario']
-
-print(imovel)
-
->>> {'matricula': 222, 'quadra': 25, 'area_m2': 630}
-```
-
-
-### Exemplo de uso:
-
-Crie um programa que possibilite armazenar em um dicionário, os nomes dos alunoes e as notas de 3 disciplinas. Calcule a média das notas e exiba um relatório, com o nome de cada aluno, suas respectivas notas e a média.
-
-```python
-
-alunos = {}
-
-for i in range(1, 4):
-    nome = input(f"Digite o nome do Aluno {i}: ")
-    fisica = float(input(f"Digite a nota de Física para {nome}: "))
-    matematica = float(input(f"Digite a nota de Matemática para {nome}: "))
-    quimica = float(input(f"Digite a nota de Química para {nome}: "))
-    
-    # Armazenando as notas no dicionário
-    alunos[nome] = {
-        "Física": fisica,
-        "Matemática": matematica,
-        "Química": quimica
-    }
-
-# Exibindo as notas de cada aluno e a média
-for aluno, notas in alunos.items():
-    print(f"\n{aluno}:")
-    for disciplina, nota in notas.items():
-        print(f"  {disciplina}: {nota}")
-    
-    # Calculando a média das notas do aluno
-    media = sum(notas.values()) / len(notas)
-    print(f"  Média: {media:.2f}")
-```
-
-Exercícios:
-
-1. Crie um dicionário para armazenar as notas de um único aluno em três disciplinas: física, matemática e química. Em seguida, peça ao usuário que insira as notas de cada disciplina e armazene-as no dicionário. Imprima o dicionário completo ao final.
-
-**Resposta Esperada:** Um dicionário com as três disciplinas como chaves e as notas inseridas pelo usuário como valores.
-
-
-2. Com o dicionário de notas criado no Exercício 1, verifique se uma nota está presente no dicionário (por exemplo, se existe uma nota para a disciplina “Biologia”). Se a nota não existir, exiba uma mensagem indicando que a disciplina não foi encontrada.
-
-**Dica:** Use o operador `in` para verificar se a chave está presente no dicionário.
-
-
-3. Expanda o programa anterior para calcular a média das notas. Crie uma função chamada calcula_media(notas) que receba o dicionário de notas como parâmetro e retorne a média. Em seguida, imprima a média na tela chamando a função.
-
-**Resposta Esperada:** A média das notas, calculada por meio da função.
-
-
-4. Modifique o dicionário de notas de forma que, para cada disciplina, o valor seja uma lista de notas (três notas por disciplina). Em seguida, escreva um código para calcular a média de cada disciplina e exiba essas médias.
-
-```python
-
-notas = {
-    "Física": [7.5, 8.0, 6.5],
-    "Matemática": [9.0, 8.5, 7.0],
-    "Química": [6.0, 7.5, 8.0]
+municipio = {
+    'nome':     'Mossoró',
+    'uf':       'RN',
+    'area_km2': 2099.33,
+    'pop':      295000,
+    'capital':  False,
 }
 ```
 
-5. Expanda o programa para armazenar dados de três alunos, onde cada aluno tem suas notas em três disciplinas (física, matemática e química). Imprima o nome de cada aluno, suas notas e a média das notas para cada aluno, como fizemos no exercício resolvido anteriormente.
+Chaves podem ser qualquer tipo **imutável** (`str`, `int`, `float`, `tuple`). Valores podem ser qualquer tipo, inclusive outros dicionários ou listas.
 
-**Dica:** Use um dicionário aninhado onde as chaves principais são os nomes dos alunos, e os valores são outros dicionários que contêm as notas por disciplina.
+---
 
-**Resposta Esperada:** A média para cada disciplina.
+## Criação
 
-6. Usando o dicionário criado no Exercício 5, encontre o aluno com a maior média e o aluno com a menor média. Imprima o nome do aluno e a média correspondente.
+```python
+# Literal
+ponto = {'id': 1, 'lon': -35.74, 'lat': -7.22}
 
-**Dica:** Calcule a média de cada aluno e armazene essas médias em outro dicionário ou lista, de forma que você possa facilmente identificar as médias máxima e mínima.
+# dict() com argumentos nomeados
+ponto = dict(id=1, lon=-35.74, lat=-7.22)
 
+# Dicionário vazio
+metadados = {}
+```
 
+---
 
+## Acesso e Modificação
+
+```python
+municipio = {'nome': 'Natal', 'area_km2': 167.26, 'pop': 890480}
+
+# Leitura por chave
+municipio['nome']          # 'Natal'
+
+# .get() — retorna None (ou padrão) se a chave não existir
+municipio.get('crs')           # None
+municipio.get('crs', 'EPSG:4674')  # 'EPSG:4674'  (valor padrão)
+
+# Adicionar ou alterar
+municipio['crs'] = 'EPSG:4674'
+municipio['pop'] = 903804
+
+# Remover
+del municipio['crs']
+removido = municipio.pop('pop')   # remove e retorna o valor
+```
+
+💣 Acessar uma chave inexistente com `[]` lança `KeyError`. Prefira `.get()` quando a chave puder não existir.
+
+---
+
+## Métodos Principais
+
+```python
+camada = {'nome': 'municipios', 'tipo': 'Polígono', 'feicoes': 167, 'crs': 'EPSG:4674'}
+
+camada.keys()     # dict_keys(['nome', 'tipo', 'feicoes', 'crs'])
+camada.values()   # dict_values(['municipios', 'Polígono', 167, 'EPSG:4674'])
+camada.items()    # dict_items([('nome', 'municipios'), ('tipo', 'Polígono'), ...])
+
+# Mesclar outro dicionário (chaves existentes são sobrescritas)
+camada.update({'feicoes': 170, 'encoding': 'UTF-8'})
+
+# Verificar existência de chave
+'crs' in camada          # True
+'escala' in camada       # False
+
+# Tamanho
+len(camada)              # 5
+```
+
+### Tabela resumo dos métodos
+
+| Método | O que faz |
+|---|---|
+| `.keys()` | Retorna as chaves |
+| `.values()` | Retorna os valores |
+| `.items()` | Retorna pares `(chave, valor)` |
+| `.get(k, padrão)` | Retorna o valor de `k` ou `padrão` se não existir |
+| `.update(d)` | Mescla `d` no dicionário (sobrescreve chaves iguais) |
+| `.pop(k)` | Remove e retorna o valor de `k` |
+| `.setdefault(k, v)` | Define `k=v` apenas se `k` não existir |
+| `.clear()` | Remove todos os itens |
+| `.copy()` | Retorna uma cópia rasa |
+
+---
+
+## Iteração
+
+```python
+camada = {'nome': 'rodovias', 'tipo': 'Linha', 'feicoes': 4312}
+
+# Iterar sobre chaves (padrão)
+for chave in camada:
+    print(chave)
+
+# Iterar sobre valores
+for valor in camada.values():
+    print(valor)
+
+# Iterar sobre pares chave-valor (forma mais comum)
+for chave, valor in camada.items():
+    print(f'{chave}: {valor}')
+```
+
+Saída do último exemplo:
+```
+nome: rodovias
+tipo: Linha
+feicoes: 4312
+```
+
+---
+
+## Dict Comprehension
+
+Cria dicionários de forma concisa, análogo ao list comprehension:
+
+```python
+# Sintaxe
+{<chave>: <valor> for <item> in <iterável> if <condição>}
+```
+
+```python
+# Converter lista de camadas em dicionário {nome: tipo}
+nomes  = ['municipios', 'rodovias', 'hidrografia']
+tipos  = ['Polígono',   'Linha',    'Linha']
+
+camadas = {n: t for n, t in zip(nomes, tipos)}
+# {'municipios': 'Polígono', 'rodovias': 'Linha', 'hidrografia': 'Linha'}
+
+# Calcular área em hectares a partir de dicionário em m²
+areas_m2 = {'lote_A': 15000, 'lote_B': 8200, 'lote_C': 32400}
+areas_ha = {k: v / 10000 for k, v in areas_m2.items()}
+# {'lote_A': 1.5, 'lote_B': 0.82, 'lote_C': 3.24}
+
+# Filtrar apenas camadas do tipo Linha
+todas = {'municipios': 'Polígono', 'rodovias': 'Linha', 'hidrografia': 'Linha'}
+linhas = {k: v for k, v in todas.items() if v == 'Linha'}
+# {'rodovias': 'Linha', 'hidrografia': 'Linha'}
+```
+
+---
+
+## Dicionários Aninhados
+
+Um valor pode ser outro dicionário, permitindo estruturas hierárquicas:
+
+```python
+shapefile = {
+    'nome': 'municipios_rn',
+    'geometria': 'Polígono',
+    'crs': {
+        'codigo': 4674,
+        'nome': 'SIRGAS 2000',
+        'tipo': 'geográfico',
+    },
+    'bbox': {
+        'xmin': -38.00,
+        'ymin': -8.00,
+        'xmax': -34.97,
+        'ymax': -4.49,
+    },
+    'campos': ['cd_mun', 'nm_mun', 'area_km2', 'pop_2022'],
+}
+
+# Acessar valores aninhados
+shapefile['crs']['nome']        # 'SIRGAS 2000'
+shapefile['bbox']['xmin']       # -38.0
+shapefile['campos'][0]          # 'cd_mun'
+```
+
+### Lista de dicionários — padrão comum em GIS
+
+```python
+feicoes = [
+    {'id': 1, 'municipio': 'Natal',      'area_km2': 167.26},
+    {'id': 2, 'municipio': 'Mossoró',    'area_km2': 2099.33},
+    {'id': 3, 'municipio': 'Parnamirim', 'area_km2': 123.47},
+]
+
+# Acessar um atributo de uma feição específica
+feicoes[1]['municipio']   # 'Mossoró'
+
+# Iterar e exibir
+for f in feicoes:
+    print(f'{f["id"]:>2} | {f["municipio"]:<12} | {f["area_km2"]:>8.2f} km²')
+```
+
+---
+
+## Exercícios
+
+### Exercício 1 — Contexto GIS
+
+Represente os atributos de uma feição geográfica (ponto de controle topográfico) como dicionário e escreva um programa que:
+
+1. Crie um dicionário com os campos: `id`, `nome`, `longitude`, `latitude`, `altitude_m`, `datum`, `metodo_levantamento`
+2. Exiba cada atributo no formato `campo: valor`
+3. Atualize a altitude com um novo valor informado pelo usuário
+4. Adicione um novo campo `data_coleta` com a data atual (`'2024-03-15'`)
+5. Exiba o dicionário atualizado
+
+---
+
+### Exercício 2 — Contexto GIS
+
+Dada a lista de camadas abaixo, use **dict comprehension** para criar:
+
+1. Um dicionário `{nome_camada: tipo_geometria}`
+2. Um dicionário `{nome_camada: quantidade_feicoes}` apenas para camadas com mais de 100 feições
+3. Um dicionário `{nome_camada: crs}` apenas para camadas com CRS `'EPSG:4674'`
+
+```python
+camadas = [
+    {'nome': 'municipios_rn',   'tipo': 'Polígono', 'feicoes': 167,   'crs': 'EPSG:4674'},
+    {'nome': 'rodovias_br',     'tipo': 'Linha',    'feicoes': 4312,  'crs': 'EPSG:4674'},
+    {'nome': 'capitais_br',     'tipo': 'Ponto',    'feicoes': 26,    'crs': 'EPSG:4326'},
+    {'nome': 'biomas_brasil',   'tipo': 'Polígono', 'feicoes': 6,     'crs': 'EPSG:4674'},
+    {'nome': 'estacoes_hidro',  'tipo': 'Ponto',    'feicoes': 891,   'crs': 'EPSG:4326'},
+]
+```
+
+---
+
+### Exercício 3 — Contexto GIS
+
+Você recebeu metadados de três shapefiles em dicionários separados. Escreva um programa que:
+
+1. Mescle os dicionários de metadados base e metadados de qualidade em um único dicionário por shapefile usando `.update()`
+2. Calcule e adicione ao dicionário final a chave `densidade_feicoes` (feições por km²)
+3. Exiba um relatório formatado para cada shapefile
+
+```python
+metadados_base = [
+    {'nome': 'municipios_rn', 'feicoes': 167, 'area_total_km2': 52811.0},
+    {'nome': 'distritos_rn',  'feicoes': 228, 'area_total_km2': 52811.0},
+    {'nome': 'setores_rn',    'feicoes': 3613, 'area_total_km2': 52811.0},
+]
+
+metadados_qualidade = [
+    {'crs': 'EPSG:4674', 'encoding': 'UTF-8',   'geometrias_invalidas': 0},
+    {'crs': 'EPSG:4674', 'encoding': 'UTF-8',   'geometrias_invalidas': 3},
+    {'crs': 'EPSG:4674', 'encoding': 'Latin-1', 'geometrias_invalidas': 12},
+]
+```
+
+Saída esperada (exemplo para o primeiro):
+```
+--- municipios_rn ---
+feicoes             : 167
+area_total_km2      : 52811.0
+crs                 : EPSG:4674
+encoding            : UTF-8
+geometrias_invalidas: 0
+densidade_feicoes   : 0.0032 feições/km²
+```
