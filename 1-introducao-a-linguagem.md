@@ -1,180 +1,363 @@
-# 1. Introdução à Linguagem
+# 1. Introdução à Linguagem Python
 
-![](.pastes/2019-09-01-09-11-58.png)
+## O que é Python?
 
-**Python é uma linguagem de programação com código aberto, de alto nível, tipicamente usada para aplicações web ou linguagens de scripts para administração de sistemas.**
+Python é uma linguagem de programação **open source**, de **alto nível** e **interpretada**, criada em 1989 por **Guido van Rossum**. Seu design prioriza legibilidade e simplicidade — o mesmo programa escrito em Java ou C pode ser expresso em Python com muito menos linhas de código.
 
-A linguagem foi criada em 1989 por **Guido Van Rossum** e o seu nome foi uma homenagem ao grupo humorístico britânico **Monty Python** (*Monty Python's Flying Circus*), embora muitas pessoas façam associação com o réptil do mesmo nome 🐍 .
-
-![guido](.pastes/2019-09-01-19-31-54.png)
-
-Guido Van Rossum - O pai da criança.
-
-### Por que Python?
-
-*extraído do link: https://pythonhelp.wordpress.com/por-que-python/*
-
-#### Java:
-``` java
-public class Hello
-{
-    public static void main(String args[]) {
-        java.util.Scanner s = new java.util.Scanner(System.in);
-        System.out.print("Digite seu nome: ");
-        String nome = s.nextLine();
-        System.out.println("Olá, " + nome);
-    }
-}
-```
-#### C:
-``` c
-#include <stdio.h>;
-int main()
-{
-    char nome[200];
-    printf("Digite seu nome: ");
-    scanf("%s", nome);
-    printf("Olá, %s\n", nome);
-    return 0;
-}
-```
-
-#### Pascal:
-``` pascal
-program HelloWorld(output);
-var
-    nome: string;
-begin
-    writeln('Digite seu nome: ');
-    read(nome);
-    writeln('Olá, ', nome);
-end.
-```
-
-#### PHP:
-```php
-$nome = readline("Digite seu nome: ");
-echo 'olá: ' . $nome;
-```
-
-#### Python: 😍
-``` python
+```python
+# Python — simples e direto
 nome = input('Digite seu nome: ')
-print('Olá', nome)
+print('Olá,', nome)
 ```
 
-### O Interpretador Python:
-```
-$ python
-Python 3.6.8 (default, May  8 2019, 15:40:17)
-[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.46.4)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-```
+## Por que Python em GIS?
 
-### Instruções de atribuição:
+Python é a linguagem padrão do ecossistema geoespacial. Ela está integrada nativamente nas principais ferramentas do mercado:
 
-Uma instrução de atribuição cria uma nova variável e dá um valor a ela:
+| Ferramenta | Uso |
+|---|---|
+| **QGIS** | Console Python embutido, plugins e automação via PyQGIS |
+| **ArcGIS / ArcPy** | Automação de geoprocessamento na plataforma Esri |
+| **GeoPandas** | Análise de dados vetoriais (shapefiles, GeoJSON) |
+| **Shapely** | Operações geométricas (buffer, interseção, união) |
+| **Fiona** | Leitura e escrita de formatos vetoriais |
+| **Rasterio** | Leitura e processamento de dados raster |
+| **pyProj** | Transformação de sistemas de coordenadas |
 
-``` python
-nome = 'Marcello'
-idade = 42
-peso = 96.50
-```
+---
 
-#### Nomes de variáveis:
+## Ambiente de Desenvolvimento
 
-Podem conter tanto letras como números, mas não podem começar com um número. É convenção utilizar letras minúsculas para nomes de variáveis, porém para indicar constantes, a convenção é colocar o nome da variável em *uppercase* (ex. `VARIAVEL=12`).
+### Console Python do QGIS
 
-O caractere *underline* (_) pode aparecer no nome de uma de variável. Muitas vezes é usado em nomes compostos, como `data_nascimento` ou `area_m2`.
+O QGIS possui um console Python integrado, acessível pelo menu **Plugins → Console Python** (atalho: `Ctrl+Alt+P`). É o ponto de entrada mais direto para automação de tarefas no QGIS.
 
-**Exemplos de nomes ilegais para variáveis:**
-
-``` python
->>> 10v = 1000
-SyntaxError: invalid syntax
->>> email@ = 'joao@email.com'
-SyntaxError: invalid syntax
->>> class = 'Programação'
-SyntaxError: invalid syntax
+```python
+# Exemplo no console do QGIS: listar camadas carregadas
+projeto = QgsProject.instance()
+for nome, camada in projeto.mapLayers().items():
+    print(camada.name())
 ```
 
-`10v` é ilegal porque começa com um número, `email@` possui um caractere ilegal. Já `class` é uma palavra reservada não pode ser utilizada como nome de variável.
+### Python fora do QGIS
 
-São palavras reservadas em Python:
+Para scripts independentes, instale o Python via [python.org](https://www.python.org) e gerencie pacotes com `pip`:
 
-```
-and         del         from        None        True
-as          elif        global      nonlocal    try
-assert      else        if          not         while
-break       except      import      or          with
-class       False       in          pass        yield
-continue    finally     is          raise
-def         for         lambda      return
+```bash
+pip install geopandas shapely fiona
 ```
 
-### Tipos de Variáveis:
+Para ambientes isolados, recomenda-se o uso de `venv` ou `conda`.
 
-- **Numéricos**: armazenam números. São: inteiros (int), de ponto flutuante (float) e complexos (complex);
-- **Literais**: armazenam caracteres (qualquer um do teclado) ou sequências de caracteres (string);
-- **Lógicos**: booleanos, armazenam verdadeiro ou falso (bool).
+---
 
-``` python
->>> valor = 100
->>> type(valor)
+## Variáveis e Atribuição
+
+Uma variável é um nome que aponta para um valor na memória. A atribuição é feita com `=`:
+
+```python
+municipio = 'Campina Grande'
+populacao = 422000
+area_km2 = 593.96
+capital = False
+```
+
+### Boas práticas de nomenclatura
+
+- Use **letras minúsculas** e **underline** para separar palavras (`snake_case`)
+- Use nomes **descritivos**: `area_ha` é melhor que `a`
+- Constantes em **maiúsculas**: `FATOR_CONVERSAO = 10000`
+- Evite acentos e caracteres especiais em nomes de variáveis
+
+```python
+# Bom
+area_m2 = 15000
+crs_destino = 'EPSG:4326'
+FATOR_HA = 10000
+
+# Evite
+a = 15000
+x1 = 'EPSG:4326'
+```
+
+### Atribuição múltipla
+
+```python
+longitude, latitude = -35.74, -7.22
+print(longitude, latitude)  # -35.74 -7.22
+
+# Desempacotar uma tupla
+ponto = (-30.11, -8.25, 17.00)
+x, y, z = ponto
+```
+
+### Palavras reservadas
+
+Não podem ser usadas como nomes de variáveis:
+
+```
+and    as     assert  break   class   continue  def     del
+elif   else   except  False   finally for       from    global
+if     import in      is      lambda  None      nonlocal not
+or     pass   raise   return  True    try       while   with  yield
+```
+
+---
+
+## Tipos de Dados Primitivos
+
+### `int` — Inteiro
+
+Números sem parte decimal.
+
+```python
+zona_utm = 24
+numero_feicoes = 1500
+```
+
+### `float` — Ponto flutuante
+
+Números com parte decimal.
+
+```python
+latitude = -8.234
+area_ha = 157.83
+escala = 1.25e-5  # notação científica: 0.0000125
+```
+
+### `str` — String (texto)
+
+Sequência de caracteres, delimitada por aspas simples ou duplas.
+
+```python
+sistema_ref = 'SIRGAS 2000'
+epsg = "EPSG:4674"
+```
+
+### `bool` — Booleano
+
+Armazena apenas `True` ou `False`.
+
+```python
+reprojetado = True
+tem_z = False
+```
+
+### Verificando o tipo com `type()`
+
+```python
+>>> type(zona_utm)
 <class 'int'>
->>> perimetro_m = 237.95
->>> type(perimetro_m)
+>>> type(area_ha)
 <class 'float'>
->>> nome = 'Maria'
->>> type(nome)
+>>> type(sistema_ref)
 <class 'str'>
->>> cond = True
->>> type(cond)
+>>> type(reprojetado)
 <class 'bool'>
 ```
 
-📚  Sugestão de leitura:  https://realpython.com/python-data-types/
-
-💡 Atribuição múltipla: permite definir diversas variáveis ao mesmo tempo e inclusive trocar os valores entre elas:
+### Conversão entre tipos (*casting*)
 
 ```python
->>> longitude, latitude = -36.70, -8.23
->>> longitude
--36.7
->>> latitude
--8.23
->>> ponto_3d = (-30.11, -8.25, 17.00)
->>> x, y, z = ponto_3d
->>> x
--30.11
->>> y
--8.25
->>> z
-17.0
+area_str = '15000'
+area_num = float(area_str)   # '15000' → 15000.0
+zona_str = str(24)            # 24 → '24'
+flag = bool(1)                # 1 → True
 ```
 
-### Operadores:
+### Tabela resumo dos tipos primitivos
 
-Operadores Numéricos Básicos:
+| Tipo | Palavra-chave | Exemplo | Uso em GIS |
+|---|---|---|---|
+| Inteiro | `int` | `24` | Zona UTM, número de feições |
+| Ponto flutuante | `float` | `-8.234` | Coordenadas, áreas, distâncias |
+| Texto | `str` | `'SIRGAS 2000'` | Nome de camada, CRS, atributos |
+| Booleano | `bool` | `True` | Flags, resultados de consulta |
 
-- Adição: +
-- Subtração: -
-- Divisão: /
-- Multiplicação: *
-- Potenciação: **
-- Resto de uma divisão: %
+---
 
-Retirado do livro **Pense em Python 2e**: 📚  https://penseallen.github.io/PensePython2e/
+## Operadores
 
-> Quando uma expressão contém mais de um operador, a ordem da avaliação depende da ordem das operações. Para operadores matemáticos, o Python segue a convenção matemática. O acrônimo PEMDAS pode ser útil para lembrar das regras:
+### Aritméticos
 
-> Os **Parênteses** têm a precedência mais alta e podem ser usados para forçar a avaliação de uma expressão na ordem que você quiser. Como as expressões em parênteses são avaliadas primeiro, 2 * (3-1) é 4, e (1+1)**(5-2) é 8. Também é possível usar parênteses para facilitar a leitura de uma expressão, como no caso de (minute * 100) / 60, mesmo se o resultado não for alterado.
+| Operador | Operação | Exemplo | Resultado |
+|---|---|---|---|
+| `+` | Adição | `3 + 2` | `5` |
+| `-` | Subtração | `10 - 4` | `6` |
+| `*` | Multiplicação | `3 * 4` | `12` |
+| `/` | Divisão | `7 / 2` | `3.5` |
+| `//` | Divisão inteira | `7 // 2` | `3` |
+| `%` | Resto (módulo) | `7 % 2` | `1` |
+| `**` | Potenciação | `2 ** 8` | `256` |
 
-> A **Exponenciação** tem a próxima precedência mais alta, então 1 + 2 ** 3 é 9, não 27, e 2 * 3 ** 2 é 18, não 36.
+**Precedência:** Parênteses > Exponenciação > `*` `/` > `+` `-` (da esquerda para a direita)
 
-> A **Multiplicação** e a **Divisão** têm precedência mais alta que a **Adição** e a **Subtração**. Assim, 2 * 3 - 1 é 5, não 4, e 6 + 4 / 2 é 8, não 5.
+```python
+# Converter área de m² para hectares
+area_m2 = 235000
+area_ha = area_m2 / 10000
+print(area_ha)  # 23.5
+```
 
-> Os operadores com a mesma precedência são avaliados da esquerda para a direita (exceto na exponenciação). Assim, na expressão degrees / 2 * pi, a divisão acontece primeiro e o resultado é multiplicado por pi. Para dividir por 2π, você pode usar parênteses ou escrever degrees / 2 / pi.
+### Relacionais (Comparação)
 
-📚  Sugestão de leitura:  https://github.com/PyLadiesSP/Cursos
+Retornam `True` ou `False`.
+
+| Operador | Significado | Exemplo |
+|---|---|---|
+| `==` | Igual a | `zona == 24` |
+| `!=` | Diferente de | `crs != 'EPSG:4326'` |
+| `>` | Maior que | `area > 100` |
+| `<` | Menor que | `pop < 50000` |
+| `>=` | Maior ou igual | `escala >= 1000` |
+| `<=` | Menor ou igual | `vertices <= 500` |
+
+```python
+>>> area_ha = 23.5
+>>> area_ha > 10
+True
+>>> area_ha == 23.5
+True
+```
+
+### Lógicos
+
+Combinam expressões booleanas.
+
+| Operador | Significado | Resultado |
+|---|---|---|
+| `and` | E lógico | `True` só se ambos forem `True` |
+| `or` | OU lógico | `True` se ao menos um for `True` |
+| `not` | NÃO lógico | Inverte o valor |
+
+```python
+area_ha = 23.5
+municipio_rn = True
+
+# Feição dentro do RN com área maior que 10 ha?
+if area_ha > 10 and municipio_rn:
+    print('Feição relevante no RN')
+
+# Verificar se está fora de uma faixa de coordenadas
+lon = -36.5
+if lon < -35 or lon > -34:
+    print('Fora da região de interesse')
+```
+
+---
+
+## Comentários
+
+Comentários são ignorados pelo interpretador e servem para documentar o código.
+
+```python
+# Isto é um comentário de linha
+
+area_m2 = 15000  # área do lote em metros quadrados
+
+"""
+Este é um comentário de múltiplas linhas.
+Também chamado de docstring quando usado em funções e classes.
+"""
+
+# Converter de m² para hectares
+area_ha = area_m2 / 10000
+```
+
+---
+
+## Funções `print()` e `input()`
+
+### `print()`
+
+Exibe valores na saída padrão.
+
+```python
+crs = 'SIRGAS 2000'
+zona = 24
+area = 157.83
+
+print(crs)                          # SIRGAS 2000
+print('Zona UTM:', zona)            # Zona UTM: 24
+print(f'Área: {area:.2f} ha')       # Área: 157.83 ha
+print('x =', -36.5, 'y =', -8.2)   # x = -36.5 y = -8.2
+```
+
+Parâmetros úteis:
+
+```python
+# sep: separador entre valores (padrão é espaço)
+print('lon', 'lat', sep=', ')  # lon, lat
+
+# end: caractere final (padrão é quebra de linha \n)
+print('Carregando', end='...')
+print('OK')  # Carregando...OK
+```
+
+### `input()`
+
+Lê uma entrada do usuário como **string**.
+
+```python
+nome_camada = input('Nome da camada: ')
+print('Camada selecionada:', nome_camada)
+```
+
+> **Atenção:** `input()` sempre retorna `str`. Use `int()` ou `float()` para converter:
+
+```python
+area_str = input('Digite a área em m²: ')
+area_m2 = float(area_str)
+area_ha = area_m2 / 10000
+print(f'Área em hectares: {area_ha:.4f} ha')
+```
+
+---
+
+## Exercícios
+
+### Exercício 1
+
+Escreva um programa que solicite ao usuário o **nome** e a **idade** e exiba uma mensagem de apresentação no formato:
+
+```
+Nome: Ana Silva | Idade: 22 anos
+```
+
+---
+
+### Exercício 2
+
+Declare variáveis para armazenar o nome de um município, sua população e sua área em km². Calcule e exiba a **densidade demográfica** (habitantes/km²) com duas casas decimais.
+
+Exemplo de saída esperada:
+```
+Município: Mossoró
+Área: 2099.33 km²
+População: 295000
+Densidade: 140.52 hab/km²
+```
+
+---
+
+### Exercício 3 — Contexto GIS
+
+Um levantamento topográfico registrou as coordenadas de um ponto em **UTM** (zona 24S, SIRGAS 2000):
+
+- Este: `290543.72` m
+- Norte: `9195820.14` m
+
+Escreva um programa que:
+
+1. Armazene as coordenadas em variáveis com nomes adequados
+2. Exiba as coordenadas formatadas com 2 casas decimais
+3. Verifique e informe se o ponto está **ao norte** do paralelo de referência 9.180.000 m N
+4. Calcule a **distância** desse ponto a um segundo ponto de coordenadas `E = 291200.00` e `N = 9196500.00` usando a fórmula da distância euclidiana: `d = ((dE² + dN²) ** 0.5)`
+
+Saída esperada:
+```
+Ponto P1: E = 290543.72 m | N = 9195820.14 m
+Ponto P2: E = 291200.00 m | N = 9196500.00 m
+Ponto está ao norte do paralelo de referência? True
+Distância entre P1 e P2: 919.88 m
+```
