@@ -147,20 +147,24 @@ if resultado is None:
 
 ## Operador Ternário
 
-Forma compacta para `if/else` em uma única linha:
+O operador ternário é uma forma compacta de escrever um if/else em uma única linha.
 
-```python
-<valor_se_true> if <condição> else <valor_se_false>
+```
+#Sintaxe:
+<valor_se_verdadeiro> if <condição> else <valor_se_falso>
 ```
 
 ```python
-area_ha = 23.5
-situacao = 'apto' if area_ha >= 10 else 'inapto'
-print(f'Imóvel: {situacao}')  # Imóvel: apto
+nota = 7.5
+if nota >= 7:
+    situacao = "Aprovado"
+else:
+    situacao = "Reprovado"
+print(situacao)
+
+# usando operador ternário (mesma lógica)
+nota = 7.5 situacao = "Aprovado" if nota >= 7 else "Reprovado" print(situacao)
 ```
-
-Use com moderação — prefira o `if/else` convencional quando a lógica for mais complexa.
-
 ---
 
 ## O Statement `pass`
