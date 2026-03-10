@@ -28,8 +28,8 @@ print(crs)      # EPSG:4674
 ```python
 msg1 = "O arquivo 'municipios.shp' foi carregado"
 msg2 = 'Sistema de referência: "SIRGAS 2000"'
-msg3 = 'Caminho: C:\\Users\\geo\\dados\\'   # barra invertida com escape
-msg4 = r'Caminho: C:\Users\geo\dados\'      # raw string — sem escape
+msg3 = 'Caminho: C:\\Users\\geo\\dados'   # barra invertida com escape
+msg4 = r'Caminho: C:\Users\geo\dados'      # raw string — sem escape
 ```
 
 ---
