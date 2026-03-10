@@ -164,7 +164,6 @@ print(situacao)
 
 # usando operador ternário (mesma lógica)
 nota = 7.5
-
 situacao = "Aprovado" if nota >= 7 else "Reprovado" print(situacao)
 ```
 ---
