@@ -118,37 +118,6 @@ nome: rodovias
 tipo: Linha
 feicoes: 4312
 ```
-
----
-
-## Dict Comprehension
-
-Cria dicionários de forma concisa, análogo ao list comprehension:
-
-```python
-# Sintaxe
-{<chave>: <valor> for <item> in <iterável> if <condição>}
-```
-
-```python
-# Converter lista de camadas em dicionário {nome: tipo}
-nomes  = ['municipios', 'rodovias', 'hidrografia']
-tipos  = ['Polígono',   'Linha',    'Linha']
-
-camadas = {n: t for n, t in zip(nomes, tipos)}
-# {'municipios': 'Polígono', 'rodovias': 'Linha', 'hidrografia': 'Linha'}
-
-# Calcular área em hectares a partir de dicionário em m²
-areas_m2 = {'lote_A': 15000, 'lote_B': 8200, 'lote_C': 32400}
-areas_ha = {k: v / 10000 for k, v in areas_m2.items()}
-# {'lote_A': 1.5, 'lote_B': 0.82, 'lote_C': 3.24}
-
-# Filtrar apenas camadas do tipo Linha
-todas = {'municipios': 'Polígono', 'rodovias': 'Linha', 'hidrografia': 'Linha'}
-linhas = {k: v for k, v in todas.items() if v == 'Linha'}
-# {'rodovias': 'Linha', 'hidrografia': 'Linha'}
-```
-
 ---
 
 ## Dicionários Aninhados
