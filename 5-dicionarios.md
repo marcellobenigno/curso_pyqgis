@@ -213,3 +213,67 @@ encoding            : UTF-8
 geometrias_invalidas: 0
 densidade_feicoes   : 0.0032 feições/km²
 ```
+---
+### Exercício 3 — Contexto GIS
+
+Em sistemas de geoprocessamento como o **SIGEF** e o **CAR**, cada imóvel rural é armazenado como um conjunto de atributos: nome, área, município e a origem do dado. Neste exercício você vai simular o cadastro de um único imóvel usando um dicionário Python.
+
+#### O que você deve fazer:
+
+1. Crie um dicionário chamado imovel com as chaves nome_propriedade, area_ha, municipio, origem e situacao. Deixe todas as chaves com valor None por enquanto.
+2. Use input() para ler cada atributo do teclado e armazenar no dicionário. Lembre-se de converter a área para float.
+3. Percorra o dicionário com for campo, valor in imovel.items() e imprima cada par no formato campo    : valor, alinhando os nomes com f"{campo:<20}".
+
+```python
+# Passo 1 — crie o dicionário com valores None
+imovel = {
+    'nome_propriedade': None,
+    # complete as outras chaves...
+}
+
+# Passo 2 — leia os dados com input()
+imovel['nome_propriedade'] = input("Nome da propriedade: ")
+imovel['area_ha']          = float(input("Área (ha): "))
+# continue para os outros campos...
+
+# Passo 3 — exiba os atributos
+print("\n=== Ficha do Imóvel Rural ===")
+for campo, valor in imovel.items():
+    print(f"{campo:<20}: {valor}")    
+```
+---
+### Exercício 4 — Contexto GIS
+
+#### Reserva legal e classificação por porte
+
+O Código Florestal (Lei 12.651/2012) exige que imóveis rurais no Cerrado e na Caatinga mantenham 20% da área como Reserva Legal. Além disso, o INCRA classifica imóveis pelo porte com base na área. Você vai calcular esses valores a partir do dicionário cadastrado.
+
+1. Aproveite o dicionário do Exercício A (ou crie um novo com os mesmos campos via input()).
+2. Calcule a reserva legal: multiplique imovel['area_ha'] por 0.20 e salve o resultado em uma nova chave 'reserva_legal_ha'.
+3. Use if/elif/else para classificar o porte: até 4 ha → 'Minifúndio', até 15 ha → 'Pequena propriedade', até 150 ha → 'Média propriedade', acima disso → 'Grande propriedade'.
+4. Salve a classificação na chave 'porte' e exiba um relatório com os campos mais relevantes.
+
+```python
+# Calcular reserva legal e adicionar ao dicionário
+imovel['reserva_legal_ha'] = imovel['area_ha'] * 0.20
+
+# Classificar por porte
+area = imovel['area_ha']
+if area < 4:
+    porte = 'Minifúndio'
+elif area <= 15:
+    porte = # complete...
+elif area <= 150:
+    porte = # complete...
+else:
+    porte = # complete...
+
+imovel['porte'] = porte
+
+# Exibir relatório
+print(f"\n=== Relatório: {imovel['nome_propriedade']} ===")
+print(f"Área total    : {imovel['area_ha']} ha")
+print(f"Reserva legal : {imovel['reserva_legal_ha']:.2f} ha (20%)")
+print(f"Porte         : {imovel['porte']}")
+print(f"Origem        : {imovel['origem']}")
+```
