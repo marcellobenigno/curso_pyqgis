@@ -183,26 +183,6 @@ Represente os atributos de uma feição geográfica (ponto de controle topográf
 
 ### Exercício 2 — Contexto GIS
 
-Dada a lista de camadas abaixo, use **dict comprehension** para criar:
-
-1. Um dicionário `{nome_camada: tipo_geometria}`
-2. Um dicionário `{nome_camada: quantidade_feicoes}` apenas para camadas com mais de 100 feições
-3. Um dicionário `{nome_camada: crs}` apenas para camadas com CRS `'EPSG:4674'`
-
-```python
-camadas = [
-    {'nome': 'municipios_rn',   'tipo': 'Polígono', 'feicoes': 167,   'crs': 'EPSG:4674'},
-    {'nome': 'rodovias_br',     'tipo': 'Linha',    'feicoes': 4312,  'crs': 'EPSG:4674'},
-    {'nome': 'capitais_br',     'tipo': 'Ponto',    'feicoes': 26,    'crs': 'EPSG:4326'},
-    {'nome': 'biomas_brasil',   'tipo': 'Polígono', 'feicoes': 6,     'crs': 'EPSG:4674'},
-    {'nome': 'estacoes_hidro',  'tipo': 'Ponto',    'feicoes': 891,   'crs': 'EPSG:4326'},
-]
-```
-
----
-
-### Exercício 3 — Contexto GIS
-
 Você recebeu metadados de três shapefiles em dicionários separados. Escreva um programa que:
 
 1. Mescle os dicionários de metadados base e metadados de qualidade em um único dicionário por shapefile usando `.update()`
