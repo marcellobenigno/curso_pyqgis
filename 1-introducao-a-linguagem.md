@@ -328,7 +328,7 @@ Nome: Ana Silva | Idade: 22 anos
 
 ### Exercício 2
 
-Declare variáveis para armazenar o nome de um município, sua população e sua área em km². Calcule e exiba a **densidade demográfica** (habitantes/km²) com duas casas decimais.
+Declare variáveis para armazenar o nome de um município, sua população e sua área em km². Calcule e exiba a **densidade demográfica** (habitantes/km²) com duas casas decimais com a função `round()`.
 
 Exemplo de saída esperada:
 ```
