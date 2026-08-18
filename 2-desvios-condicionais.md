@@ -216,8 +216,8 @@ O **INCRA** classifica imóveis rurais por módulos fiscais. Escreva um programa
 | Tamanho | Classificação |
 |---|---|
 | Até 1 módulo fiscal | Minifúndio |
-| De 1 a 4 módulos fiscais | Pequena propriedade |
-| De 4 a 15 módulos fiscais | Média propriedade |
+| maior que 1 a 4 módulos fiscais | Pequena propriedade |
+| maior que 4 a 15 módulos fiscais | Média propriedade |
 | Acima de 15 módulos fiscais | Grande propriedade |
 
 Exemplo de saída esperada:
