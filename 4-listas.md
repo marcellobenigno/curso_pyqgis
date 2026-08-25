@@ -285,6 +285,8 @@ municipios = [
 
 1. Crie uma lista com os **nomes** de todos os municípios
 2. Crie uma lista com os municípios cuja **área seja maior que 500 km²**
+3. Crie uma lista de tuplas `(nome, densidade)` com a **densidade demográfica** (hab/km²) de cada município, com 2 casas decimais
+4. Filtre apenas os municípios da **região Oeste**
 
 
 ## Exercício 4 — Painel de Camadas de um Projeto QGIS
@@ -493,5 +495,3 @@ Total de feições vetoriais: 11040
 | Transformar ou filtrar | `[expr for x in lista if cond]` |
 | Abrir uma tupla em variáveis | `cod, lon, lat, alt = marco` |
 
-3. Crie uma lista de tuplas `(nome, densidade)` com a **densidade demográfica** (hab/km²) de cada município, com 2 casas decimais
-4. Filtre apenas os municípios da **região Oeste**
