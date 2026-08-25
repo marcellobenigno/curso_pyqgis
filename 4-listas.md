@@ -253,7 +253,7 @@ camadas = [
 
 Você tem uma lista de pontos de amostragem no formato `(nome, longitude, latitude)`. Escreva um programa que:
 
-1. Ordene os pontos por **latitude** (do mais ao sul para o mais ao norte)
+1. Ordene os pontos por **latitude** (do mais ao sul para o mais ao norte) (dica: pesquise na internet sobre `key=lambda` para ordenação de listas)
 2. Exiba os pontos ordenados com nome e coordenadas formatadas com 4 casas decimais
 3. Identifique e exiba o ponto mais ao norte e o mais ao sul
 
