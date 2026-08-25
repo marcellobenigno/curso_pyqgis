@@ -212,15 +212,6 @@ Tuplas suportam os métodos de leitura (`.index()`, `.count()`) mas não os de m
 | Chave de dicionário (listas não podem ser chaves) | **Tupla** |
 | Iteração simples sem modificação | Ambas |
 
-```python
-# Tupla como chave de dicionário — útil em geocodificação
-elevacoes = {
-    (-35.74, -7.22): 450.0,
-    (-36.10, -8.01): 312.5,
-}
-elevacoes[(-35.74, -7.22)]  # 450.0
-```
-
 ### Lista vs. Tupla — resumo
 
 | Característica | Lista | Tupla |
