@@ -309,7 +309,7 @@ projeto = ['limite_municipal', 'hidrografia', 'rodovias']
 
 3. **Importar um pacote de camadas.** Um colega enviou duas camadas de uma vez: `['uso_solo', 'hidrografia']`. Anexe as duas ao painel usando `.extend()` — em **uma única chamada**. Exiba a lista.
 
-4. **Auditar o painel.** Responda no terminal, usando `in`, `.count()` e `len()`:
+4. **Auditar o painel.** Responda, usando `in`, `.count()` e `len()`:
    - A camada `'rodovias'` está carregada?
    - E a camada `'geologia'`?
    - Quantas vezes `'hidrografia'` aparece? (o `.extend()` acabou de gerar uma duplicata)
